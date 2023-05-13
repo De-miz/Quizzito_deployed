@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load static %}
+{% load demiztags %}
+
+
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+</head>
+
+
+<body id="body" onresize="screensizeDetector()" 
+onload="timing(stopWatch); screensizeDetector(); executeOnTrigger(quizSubmit, for_quizSubmit);">
+
+    <!-- Reuse these in any page to add navigation bar, pop_ups, or sidemenu -->
+    {% include 'navigationbar.html' %} 
+    {% include 'pop_ups.html' %}
+    {% include 'sidemenu.html' %}
+
+    <main id="main">
+        <h1 id='quiz-header'>{{ course }}</h1>
+    
+        <form class="questions-form" method="post" enctype="multipart/form-data" action='score/{{course_url_like}}'>
+            {% csrf_token %}
+
+            
+            <time id='timer' name="timer">{{timer_py}}</time>
+            <div hidden>
+                <input id="timer_py" name="timer_py" type="text" value="">
+                <input type="text" name="qgen_amount_of_questions" value="{{amount_of_questions}}">
+                <input type="text" id="qgen_notice" name="qgen_notice" value="{{qgen_notice}}">
+                <input type="text" id="qgen_difficulty" name="qgen_difficulty" value="{{difficulty}}">
+                <input type="text" id="qgen_header" name="qgen_header" value="{{course}}">
+            </div>
+    
+
+            <ol>  
+            {% for count, q, opt1, opt2, opt3, opt4, ans in questions %}
+                {% with optAColor=selected_ans|indexLoop:forloop.counter0|options:opt1|colorOptions:ans optBColor=selected_ans|indexLoop:forloop.counter0|options:opt2|colorOptions:ans optCColor=selected_ans|indexLoop:forloop.counter0|options:opt3|colorOptions:ans optDColor=selected_ans|indexLoop:forloop.counter0|options:opt4|colorOptions:ans selected_opt=selected_ans|get_by_index:forloop.counter0 %}
+                    <div class="question-tiles">
+                        <h1 id ="question{{ count|add:1 }}_ans" style = "display:none;" value="{{ans}}">{{ans}}</h1>
+                        <li><pre>{{ q }}</pre></li><br>
+
+
+                        <input 
+                        class="question-option" type="radio" 
+                        name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionA" 
+                        value="{{ opt1 }}" {% if selected_ans|checkQuizSubmit and opt1 == selected_opt %} checked {% endif %}>
+                        <label 
+                        class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionA" 
+                        style="color:{{optAColor}};"><span>{{ opt1 }}</span></label><br>
+                        
+
+                        <input 
+                        class="question-option" type="radio" 
+                        name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionB" 
+                        value="{{ opt2 }}" {% if selected_ans|checkQuizSubmit and opt2 == selected_opt %} checked {% endif %}>
+                        <label 
+                        class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionB" 
+                        style="color:{{optBColor}};"><span>{{ opt2 }}</span></label><br>
+
+
+                        <input 
+                        class="question-option" type="radio" 
+                        name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionC" 
+                        value="{{ opt3 }}" {% if selected_ans|checkQuizSubmit and opt3 == selected_opt %} checked {% endif %}>
+                        <label 
+                        class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionC" 
+                        style="color:{{optCColor}};"><span>{{ opt3 }}</span></label><br>
+
+
+                        <input 
+                        class="question-option" type="radio" 
+                        name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionD" 
+                        value="{{ opt4 }}" {% if selected_ans|checkQuizSubmit and opt4 == selected_opt %} checked {% endif %}>
+                        <label 
+                        class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionD" 
+                        style="color:{{optDColor}};"><span>{{ opt4}}</span></label><br>
+
+                    </div>
+                {% endwith %}
+            {% endfor %}
+            </ol>
+            <div align="center" id="submit-btn-container">
+                <button id ="submit-btn" type="submit" onclick="status='off';" title="End Quiz">Finish Quiz</button>
+            </div>
+        </form>
+        <div id = "results"></div>
+
+        <div align="center" id="after-quiz-btns">
+            <a href="../"><button class="style1-btn home-btn" title="Go back to home page">&lt&lt Home</button></a>
+            <a href="#" onclick="tryAgainQuiz(); //this.href = window.location.href">
+                <button class="style1-btn try-again-btn" title="Attempt this quiz again">Try Again</button>
+            </a>
+            <button class="style1-btn result-btn" onclick="$displayManager(quizResult)">Result &gt&gt</button>
+        </div>
+        <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
+    </main>
+
+    {% include 'footer.html' %} <!-- Reuse this in any page to apply footer -->
+
+    <div hidden>
+        <span id="course_url_like">{{course_url_like}}</span>
+        <span id="course_category">{{course_category}}</span>
+        <span id="difficulty">{{difficulty}}</span>
+        <span id="amount_of_questions">{{amount_of_questions}}</span>
+        <span id="user_score">{{user_score}}</span>
+        <span id="answered_qst_count">{{request.session.answered_qst_count}}</span>
+        <span id="attempted_qst_count">{{request.session.attempted_qst_count}}</span>
+        <span id="quizSubmit">{{quiz_submit}}</span>
+    </div>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+@font-face {
+    font-family: Poppins;
+    src: url('fonts/Poppins-Thin.ttf');
+}
+
+@font-face {
+    font-family: Quicksand;
+    src: url('fonts/Quicksand-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url('fonts/Raleway-ExtraLight.ttf');
+}
+
+@font-face {
+	font-family: Comfortaa;
+	src: url('fonts/Comfortaa-VariableFont_wght.ttf');
+}
+
+@font-face {
+	font-family: Cormorant;
+	src: url('fonts/Cormorant-VariableFont_wght.ttf');
+}
+
+@font-face {
+	font-family: Montserrat;
+	src: url('fonts/Montserrat-VariableFont_wght.ttf');
+}
+
+@font-face {
+	font-family: OpenSans;
+	src: url('fonts/OpenSans-VariableFont_wdth,wght.ttf');
+}
+
+@font-face {
+	font-family: Roboto;
+	src: url('fonts/RobotoMono-VariableFont_wght.ttf');
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang='en'>
+<head>
+    {% include 'head.html' %}
+</head>
+
+<body onresize="screensizeDetector()" onload="screensizeDetector()">
+
+    {% include 'navigationbar.html' %}
+    {% include 'pop_ups.html' %}
+    {% include 'sidemenu.html' %}
+
+    <main id='main'>
+        <div class="about-remark">
+            <h1 id="head">About Us</h1>
+            <p id = "para1">
+                This site was created to help developers learning<br> how to program test their knowledge
+                in the<br> field they are pursuing.
+            </p>
+            <p>
+                
+                The website has quiz on various programming laguages<br> which give our users the ability
+                to test themselves<br> in more than one programming language.
+            </p>
+            <p id="para1">
+                The quizes has also been structured in a way that the user<br> starts from a beginner level(quiz 1-4)
+                and to the intermediate<br> level(quiz 5-8) and then advance level(quiz 9-10).
+
+            </p>
+            <h1 id = "head">Developer</h1>
+        </div>
+
+        <article class="myself">
+            <img src="{% static 'img/demiz.jpg' %}" alt="Author of Quizzito, Emmanuel Eddie Joshua Kweh picture">
+            <h1 id = "head">About Author</h1>
+            <p class="myself-para">
+                Hello and welcome to my website! My name is Emmanuel Eddie Joshua Kweh 
+                (Demiz) and I am a 20-year-old web developer from Ghana. I have been programming 
+                for two years and I love creating websites that are user-friendly, 
+                responsive and dynamic. I have experience in HTML, CSS, Python, Django, 
+                JavaScript and SQL, and I am always eager to learn new technologies and 
+                improve my skills. My goal is to become a full-stack developer and create web 
+                applications that can solve real-world problems and make a positive impact. 
+                I hope you enjoy browsing this quiz website and feel free to contact me if 
+                you have any questions or feedback. Thank you for visiting!
+            </p>
+        </article>
+        <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
+    </main>
+
+
+    {% include 'footer.html' %}
+
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</body>
+</html>
