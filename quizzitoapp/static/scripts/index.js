@@ -11,3 +11,4 @@ document.addEventListener('DOMContentLoaded', () => {
     $addNewCourse('Java', 'Is it true Java is one of the prefered languages for web development?', 'java.png');
     $addNewCourse('PHP', 'PHP is a server-side scripting language designed specifically for web development', 'php.jpg');
 })
+
