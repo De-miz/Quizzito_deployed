@@ -3,7 +3,6 @@
     font-family: Comfortaa, Arial, Helvetica, sans-serif;
 }
 body {
-    background-color: #e4f3ff;
     margin: 0;
     height: -webkit-fitcontent;
     height: -moz-fit-content;
@@ -127,6 +126,7 @@ body {
     height: 50vh;
     width: 220px;
     background-color: rgb(255, 255, 255);
+    /* background-color: rgba(255, 255, 255, 0); upcoming update*/ 
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     /*box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);*/
@@ -145,11 +145,6 @@ body {
     height: 34px;
     transition: 0.3s all linear;
 }
-/*
-.sub-menu a {
-    text-decoration: none;
-    color: #0080ff;
-}*/
 .menu, 
 .side-menu-headers {
     display: block;
