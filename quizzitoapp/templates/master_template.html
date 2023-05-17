@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="revised detail" content="last updated time">
+    <meta name="author" content="Koders, Emmanuel Eddie Joshua Kweh, Demiz">
+    <meta name="keywords" content="{% block KEYWORDS %}{% endblock %}">
+    <meta name="description" content="{% block DESCRIPTION %}{% endblock %}">
+    <link rel='icon' href="{% static 'logos/quizzito_logo.png' %}" type="image/x-icons">
+    <link rel="stylesheet" href="{% static 'font.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'index.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'pop_ups.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'quiz.css' %}" type="text/css">
+    <script src="{% static 'scripts/global.js' %}"></script>
+    {% block HOME_PAGE_SCRIPT %}{% endblock %}
+    <title>{% block PAGE_TITLE %}{% endblock %}</title> 
+</head>
+
+<body {% block body_attr %}{% endblock %}>
+    <noscript>You must enable JavaScript in your browser in order to run this site</noscript>
+    <!-- The above sentence is dumb abeg someone put something nice for there -->
+
+    {% include 'navigationbar.html' %}
+    {% include 'pop_ups.html' %}
+    {% include 'sidemenu.html' %}
+
+    <main id="main" {% block main_attr %}{% endblock %}>
+        {% block CONTENT %}
+        <!-- Page content comes here -->
+        
+        {% endblock %}
+    </main>
+
+    {% include 'footer.html' %}
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</body>
+
+</html>

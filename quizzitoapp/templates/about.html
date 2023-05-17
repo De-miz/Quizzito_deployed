@@ -1,18 +1,19 @@
-<!DOCTYPE html>
+{% extends 'master_template.html' %}
 {% load static %}
+{% load demiztags %}
 
-<html lang='en'>
-<head>
-    {% include 'head.html' %}
-</head>
+<!-- META TAGS -->
+{% block DESCRIPTION %}Quizzito was created to help developers learning
+how to program test their knowledge in the
+field they are pursuing.{% endblock %}
+{% block KEYWORDS %}Quizzito, About Quizzito, Quiz, Demiz, Emmanuel Eddie Joshua Kweh, Emmanuel{% endblock %}
 
-<body onresize="screensizeDetector()" onload="">
+{% block PAGE_TITLE %}About{% endblock %}
 
-    {% include 'navigationbar.html' %}
-    {% include 'pop_ups.html' %}
-    {% include 'sidemenu.html' %}
 
-    <main id='main'>
+<span hidden>{% block body_attr %}onresize="screensizeDetector();"{% endblock %}</span> 
+
+{% block CONTENT %}    
         <div class="about-remark">
             <h1 id="head">About Us</h1>
             <p id = "para1">
@@ -48,11 +49,4 @@
             </p>
         </article>
         <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
-    </main>
-
-
-    {% include 'footer.html' %}
-
-    <script src="{% static 'scripts/scripts.js' %}"></script>
-</body>
-</html>
+{% endblock %}

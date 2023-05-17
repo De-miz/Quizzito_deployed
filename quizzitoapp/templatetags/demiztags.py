@@ -51,3 +51,14 @@ def checkQuizSubmit(questions_taken):
     if questions_taken:
         return True
     return False
+
+
+
+@register.filter(name='trim')
+def trim(text):
+    return text.strip()
+
+
+@register.filter(name='loop')
+def loop(start: int, stop: int=0):
+    return range(start, stop) if stop else range(start)
