@@ -7,6 +7,33 @@ body {
     /* background-color: #d4d4d4; upcoming update*/
     font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Loader */
+#loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    z-index: 900;
+    
+}
+#loader {
+    height: 60px;
+    animation: loader 2s linear infinite;
+}
+@keyframes loader {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.5);}
+}
+
+/* MAIN CONTENT */
 main {
     margin-top: 100px;
     padding: 0 10px;
