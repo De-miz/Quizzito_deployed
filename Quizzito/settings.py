@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-j(woi(9(aa4is4-5$3kt+^d9#%!5)#-=8z(7i)3g(am&w0(%*='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*'] # For testing
-# ALLOWED_HOSTS = ['quizzito.pythonanywhere.com'] # For production or major tests
+# ALLOWED_HOSTS = ['*'] # For testing
+ALLOWED_HOSTS = ['quizzito.pythonanywhere.com'] # For production or major tests
 
 
 # Application definition
