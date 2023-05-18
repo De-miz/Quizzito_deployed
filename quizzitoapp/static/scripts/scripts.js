@@ -154,30 +154,6 @@ function reloadTyper() {
 }
 
 
-window.onscroll = () => {
-    scrollCoords = document.documentElement.scrollTop;
-    scrollHistory.push(scrollCoords)
-    if (scrollCoords > 5) {
-        navigationBar.style.top = '-60px';
-        navigationBar.style.backgroundColor = 'rgba(255, 255, 255, 0.774)';
-        sidemenu.style.transition = '1s all ease-out';
-        sidemenu.style.top = '0';
-    } else {
-        navigationBar.style.backgroundColor = 'white';
-    }
-    if (scrollHistory.length > 2) {
-        scrollHistory.shift();
-        if (scrollHistory[0] > scrollHistory[1]) {
-            navigationBar.style.top = '0';
-            sidemenu.style.transition = '0.5s all linear';
-            sidemenu.style.top = '58px';
-        }
-    }
-
-    to_top_btn.style.display = scrollCoords > 700 ? "block": "none";
-}
-
-
 function showDropDown(menu) {
     let currentHeight = menu.style.height;
     menu.style.height = (currentHeight == '390px') ? '34px':'390px';
@@ -440,6 +416,30 @@ function resetMenuForMobile() {
 
 // Events 
 
+window.onscroll = () => {
+    scrollCoords = document.documentElement.scrollTop;
+    scrollHistory.push(scrollCoords)
+    if (scrollCoords > 5) {
+        navigationBar.style.top = '-60px';
+        navigationBar.style.backgroundColor = 'rgba(255, 255, 255, 0.774)';
+        sidemenu.style.transition = '1s all ease-out';
+        sidemenu.style.top = '0';
+    } else {
+        navigationBar.style.backgroundColor = 'white';
+    }
+    if (scrollHistory.length > 2) {
+        scrollHistory.shift();
+        if (scrollHistory[0] > scrollHistory[1]) {
+            navigationBar.style.top = '0';
+            sidemenu.style.transition = '0.5s all linear';
+            sidemenu.style.top = '58px';
+        }
+    }
+
+    to_top_btn.style.display = scrollCoords > 700 ? "block": "none";
+}
+
+
 for (i=0; i<resultPopupBox.length; i++) {
     (
         function(index) {
@@ -455,7 +455,7 @@ for (i=0; i<resultPopupBox.length; i++) {
     const courseHiddenCover = document.getElementsByClassName('tile_content');
     const courseHiddenBottom = document.getElementsByClassName('hidden_content');
     const courseButton = document.getElementsByClassName('tile-btn');
-    var hoveredCardIndex = 'None';
+    var hoveredCardIndex = 'None', eventType = '';
 
     for (let i=0; i<courseHiddenCover.length; i++) {
         (function(index) {
@@ -465,32 +465,36 @@ for (i=0; i<resultPopupBox.length; i++) {
             })
 
 
-            courseHiddenCover[index].addEventListener('touchend', function(e) {
-                if (e.type == 'touchend') {
-                    hovered = courseHiddenCover[index].style.top == '' ? false: true;
-                    courseHiddenBottom[index].style.backgroundColor = hovered ? 'unset': 'rgba(255, 255, 255, 0.705)';
-                    courseHiddenBottom[index].style.color = hovered ? 'unset': 'black';
-                    courseHiddenBottom[index].style.backdropFilter = hovered ? 'unset': 'blur(5px)';
-                    courseHiddenCover[index].style.top = hovered ? '': '-40%';
+            courseHiddenCover[index].addEventListener('click', function(e) {
+                console.log('hello');
+                if (e.type == 'click') {
+                    if (!eventType) {
+                        hovered = courseHiddenCover[index].style.top == '' ? false: true;
+                        courseHiddenBottom[index].style.backgroundColor = hovered ? 'unset': 'rgba(255, 255, 255, 0.705)';
+                        courseHiddenBottom[index].style.color = hovered ? 'unset': 'black';
+                        courseHiddenBottom[index].style.backdropFilter = hovered ? 'unset': 'blur(5px)';
+                        courseHiddenCover[index].style.top = hovered ? '': '-40%';
 
-                    if (hoveredCardIndex != 'None' && hoveredCardIndex != index) {
-                        courseHiddenBottom[hoveredCardIndex].style.backgroundColor = 'unset';
-                        courseHiddenBottom[hoveredCardIndex].style.color = 'unset';
-                        courseHiddenBottom[hoveredCardIndex].style.backdropFilter = 'unset';
-                        courseHiddenCover[hoveredCardIndex].style.top = '';
-                    };
+                        if (hoveredCardIndex != 'None' && hoveredCardIndex != index) {
+                            courseHiddenBottom[hoveredCardIndex].style.backgroundColor = 'unset';
+                            courseHiddenBottom[hoveredCardIndex].style.color = 'unset';
+                            courseHiddenBottom[hoveredCardIndex].style.backdropFilter = 'unset';
+                            courseHiddenCover[hoveredCardIndex].style.top = '';
+                        };
 
-                    hoveredCardIndex = index;
+                        hoveredCardIndex = index;
+                    }
                 }
             });
 
 
-            courseHiddenCover[index].addEventListener('mouseenter', function(e) {
-                if (e.type == 'mouseenter') {
+            courseHiddenCover[index].addEventListener('mouseover', function(e) {
+                if (e.type == 'mouseover') {
                     courseHiddenBottom[index].style.backgroundColor = 'rgba(255, 255, 255, 0.705)';
                     courseHiddenBottom[index].style.color = 'black';
                     courseHiddenBottom[index].style.backdropFilter = 'blur(5px)';
                     courseHiddenCover[index].style.top = '-40%';
+                    eventType = 'mouseover'
                 }
             });
 
@@ -501,6 +505,7 @@ for (i=0; i<resultPopupBox.length; i++) {
                     courseHiddenBottom[index].style.color = 'unset';
                     courseHiddenBottom[index].style.backdropFilter = 'unset';
                     courseHiddenCover[index].style.top = '';
+                    eventType = ''
                 }
             });
         })(i);

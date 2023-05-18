@@ -62,3 +62,9 @@ def trim(text):
 @register.filter(name='loop')
 def loop(start: int, stop: int=0):
     return range(start, stop) if stop else range(start)
+
+
+@register.filter(name='make_a_list')
+def make_a_list(values: str):
+    values = values.split(',')
+    return values
