@@ -24,7 +24,7 @@
 <body {% block body_attr %}{% endblock %}>
 
     <div id="loader-container">
-        <img id="loader-canceler" src="{% static 'icons/cancel_icon.png' %}" alt="hi">
+        <img id="loader-canceler" src="{% static 'icons/cancel_icon.png' %}" alt="hi" onclick="closeLoader();">
         <img id="loader" src="{% static 'logos/quizzito_logo.png' %}" alt="Loading...">
     </div>
 
