@@ -1,1 +1,5 @@
 /try/*
+/Quizzito/*
+/quizzitoapp/__pycache__/*
+/quizzitoapp/templatetags/__pycache__/*
+/quizzitoapp/migrations/*
