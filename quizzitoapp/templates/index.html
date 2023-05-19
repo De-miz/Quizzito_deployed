@@ -58,9 +58,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
         <span class="main_box_title">Start Your Journey Now</span>
         <!-- Course Cards -->
 
-        {% for course in 8|loop %} 
-            {% include 'course_card.html' %}
-        {% endfor %}
+        {% include 'course_card.html' %}
 
         <span id="initiatFeedbackEmailBox" hidden>{{ initiatFeedbackEmailBox }}</span>
 

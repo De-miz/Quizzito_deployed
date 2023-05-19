@@ -2,7 +2,7 @@
 
 <!-- Quiz Result -->
 <div class="popup" id="result-background" onclick="$forceDisappear(this)">
-    <div class="result">
+    <div class="result" id="result-background-main-box">
         <img onclick="$displayManager(quizResult)" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
         <h2 name="quiz-level"></h2>
         <p class="score" id="score-result">Score: {{user_score}}%</p>
@@ -19,7 +19,7 @@
 
 <!-- Quiz Description -->
 <div class="popup" id="quiz-description-background" onclick="$forceDisappear(this)">
-    <div class="result">
+    <div class="result" id="quiz-description-background-main-box">
         <img onclick="$displayManager(document.getElementById('quiz-description-background'))" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
         <h2 name="quiz-level"></h2>
         <p class="result-detail" name="quiz-category"></p>
@@ -31,7 +31,7 @@
 
 <!-- Login feature-not-added message -->
 <div class="popup" id="login-popup" onclick="$forceDisappear(this)">
-    <div class="result">
+    <div class="result" id="login-popup-main-box">
         <p id='popupMsg' class='popupMsg'></p>
         <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('login-popup'))">OK</button></div>
     </div>
@@ -39,7 +39,7 @@
 
 <!-- popup message for feedback -->
 <div class="popup" id="feed_popup" onclick="$forceDisappear(this); if (initiatFeedbackEmailBox = 'off') {window.location.href = './'}">
-    <div class="result">
+    <div class="result" id="feed-popup-main-box">
         <p id='feed_popupMsg' class='popupMsg'></p>
         <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('feed_popup'))">OK</button></div>
     </div>
