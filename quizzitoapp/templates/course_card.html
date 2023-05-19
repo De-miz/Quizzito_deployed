@@ -1,8 +1,10 @@
 {% load static %}
+{% load demiztags %}
 
-<div class="tile">
+{% for i in 8|loop %} 
+  <div class="tile">
     <div class="tile_content" id="tile_content">
-      <span class="tile_cover" id="_cover">
+      <span class="tile_cover" id="_cover" style="background-color: {% cycle '#040d0d' '#d1b1ea' '#f6d001' '#2a97cf' '#1a037c' '#11379f' '#9b0107' '#505050' %}">
       </span>
       <span class="hidden_content" id="hiddenContent">
         <span class="hc_title" id="courseID"></span>
@@ -12,4 +14,5 @@
         </div>
       </span>
     </div>
-</div>
+  </div>
+{% endfor %}

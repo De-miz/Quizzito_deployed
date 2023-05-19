@@ -31,6 +31,7 @@ body {
     right: 10px;
     height: 50px;
     opacity: 0;
+    transform: translateY(-100%);
     cursor: pointer;
 }
 #loader {
@@ -93,7 +94,7 @@ main {
 	border-radius:10px;
     font-family: Arial, Helvetica, sans-serif;
 	font-size:18px;
-    transition: 0.15s all linear;
+    transition: 0.2s all linear;
     z-index: 10;
 }
 #to-top:hover {
@@ -199,20 +200,23 @@ nav img {
 }
 .qgen-div, 
 .typer-main-section {
-    background: url('img/qgen2.png') center;
+    background-position: center;
     background-size: cover;
     background-attachment: fixed;
     border-radius: 20px;
     overflow: hidden;
+}
+.qgen-div {
+    background-color: #003964;
+    background-image: url('img/qgen.png');
 }
 .typer-main-section {
     display: block;
     text-align: center;
     margin-bottom: 200px;
     padding: 100px 20px;
-    background: url('img/qgen.jpg') center;
-    background-size: cover;
-    background-attachment: fixed;
+    background-color: #254e8c;
+    background-image: url('img/why_quiz.jpg');
     overflow: visible;
 }
 .qgen-div-cover {
@@ -287,7 +291,6 @@ nav img {
     display: block;
     font-size: 3em;
     margin: 30px 0;
-    /*text-shadow: 0 0 10px rgba(0, 0, 0, 0.39);*/
 }
 .imagebox_whyus .tile{
     position: relative;
@@ -315,9 +318,6 @@ nav img {
     width: 100%;
     height: 50%;
 }
-/* .tile_content:hover{
-    top: -40%;
-} */
 .imagebox_whyus .hidden_content{
     position: absolute;
     top: 0;
@@ -341,16 +341,13 @@ nav img {
     margin-top: 60px;
     font-size: 1.2em;
 }
-/* .hidden_content:hover{
-    background-color: rgba(255, 255, 255, 0.705);
-    color: black;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-} */
 .tile-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 175px;
   border: none;
   border-radius: 4px;
-  padding: 10px 25px;
+  padding: 15px 35px;
   font-size: 1em;
   color: white;
   background-color: #0080ff;
