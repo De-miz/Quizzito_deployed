@@ -101,6 +101,19 @@ function screensizeDetector() {
 }
 
 
+function scaler(elemID, target=500) {
+    let elem = document.getElementById(elemID), default_scale;
+    if (window.innerWidth <= target) {
+        let x = window.innerWidth;
+        default_scale = 1 - 100/x*0.9; 
+        default_scale = (default_scale <= 0.5) ? 0.5: default_scale >= 1 ? 1: default_scale;
+        elem.style.transform = `scale(${default_scale})`;
+    } else {
+        elem.style.transform = 'scale(1)';
+    }
+}
+
+
 function handleScroll() {
     let p_list = [];
     for (i=0; i<popups.length; i++) {
@@ -388,7 +401,7 @@ function resetMenuForMobile() {
         courseCover = document.getElementById(courseCover_id);
 
         document.getElementById(course).innerHTML = cap(course);
-        document.getElementById(new_description_id).innerHTML = description;
+        document.getElementById(new_description_id).innerHTML = description.length <= 75 ? description : "ERROR!!! LENGTH MUST BE 75 OR BELOW";
         courseCover.style.background = `url('static/img/${img}') center`;
         courseCover.style.backgroundSize = "auto 100%";
     }
@@ -436,7 +449,11 @@ window.onscroll = () => {
         }
     }
 
-    to_top_btn.style.display = scrollCoords > 700 ? "block": "none";
+    if (scrollCoords > 700) {
+        to_top_btn.style.display = "block";
+    } else {
+        to_top_btn.style.display = "none";
+    }
 }
 
 
@@ -473,7 +490,7 @@ for (i=0; i<resultPopupBox.length; i++) {
                         courseHiddenBottom[index].style.backgroundColor = hovered ? 'unset': 'rgba(255, 255, 255, 0.705)';
                         courseHiddenBottom[index].style.color = hovered ? 'unset': 'black';
                         courseHiddenBottom[index].style.backdropFilter = hovered ? 'unset': 'blur(5px)';
-                        courseHiddenCover[index].style.top = hovered ? '': '-40%';
+                        courseHiddenCover[index].style.top = hovered ? '': '-47%';
 
                         if (hoveredCardIndex != 'None' && hoveredCardIndex != index) {
                             courseHiddenBottom[hoveredCardIndex].style.backgroundColor = 'unset';
@@ -493,7 +510,7 @@ for (i=0; i<resultPopupBox.length; i++) {
                     courseHiddenBottom[index].style.backgroundColor = 'rgba(255, 255, 255, 0.705)';
                     courseHiddenBottom[index].style.color = 'black';
                     courseHiddenBottom[index].style.backdropFilter = 'blur(5px)';
-                    courseHiddenCover[index].style.top = '-40%';
+                    courseHiddenCover[index].style.top = '-47%';
                     eventType = 'mouseover'
                 }
             });
