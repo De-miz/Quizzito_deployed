@@ -1,9 +1,9 @@
 {% load static %}
 
 <!-- Quiz Result -->
-<div class="popup" id="result-background" onclick="$forceDisappear(this)">
+<div class="popup" id="result-background" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}))">
     <div class="result" id="result-background-main-box">
-        <img onclick="$displayManager(quizResult)" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
+        <img onclick="$displayManager(quizResult, new fade_args({elemID: quizResult.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}))" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
         <h2 name="quiz-level"></h2>
         <p class="score" id="score-result">Score: {{user_score}}%</p>
         <p class="result-detail" name="quiz-category"></p>
@@ -18,9 +18,9 @@
 </div>
 
 <!-- Quiz Description -->
-<div class="popup" id="quiz-description-background" onclick="$forceDisappear(this)">
+<div class="popup" id="quiz-description-background" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}))">
     <div class="result" id="quiz-description-background-main-box">
-        <img onclick="$displayManager(document.getElementById('quiz-description-background'))" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
+        <img onclick="$displayManager(document.getElementById('quiz-description-background'), new fade_args({elemID: 'quiz-description-background', direction: 'middle', scale: 0.5, speed: 1, steps: 70}))" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
         <h2 name="quiz-level"></h2>
         <p class="result-detail" name="quiz-category"></p>
         <p class="result-detail" name="quiz-difficulty"></p>
@@ -30,18 +30,18 @@
 </div>
 
 <!-- Login feature-not-added message -->
-<div class="popup" id="login-popup" onclick="$forceDisappear(this)">
+<div class="popup" id="login-popup" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}))">
     <div class="result" id="login-popup-main-box">
         <p id='popupMsg' class='popupMsg'></p>
-        <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('login-popup'))">OK</button></div>
+        <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('login-popup'), new fade_args({elemID: 'login-popup', direction: 'middle', scale: 0.5, speed: 1, steps: 70}))">OK</button></div>
     </div>
 </div>
 
 <!-- popup message for feedback -->
-<div class="popup" id="feed_popup" onclick="$forceDisappear(this); if (initiatFeedbackEmailBox = 'off') {window.location.href = './'}">
+<div class="popup" id="feed_popup" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70})); if (initiatFeedbackEmailBox = 'off') {window.location.href = './'}">
     <div class="result" id="feed-popup-main-box">
         <p id='feed_popupMsg' class='popupMsg'></p>
-        <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('feed_popup'))">OK</button></div>
+        <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('feed_popup'), new fade_args({elemID: 'feed_popup', direction: 'middle', scale: 0.5, speed: 1, steps: 70}))">OK</button></div>
     </div>
 </div>
 

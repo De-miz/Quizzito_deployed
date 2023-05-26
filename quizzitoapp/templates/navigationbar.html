@@ -11,10 +11,10 @@
         <a class="nav-links" href="./" title="Go to Home page">Home</a>
         <a class="nav-links" href="about" title="Go to About page">About</a>
         <a class="nav-links" href="qgen" title="Generate your own custom quiz with Q-gen">Q-gen</a>
-        <span class="nav-links" title="This feature is not added yet" onclick="$displayManager(document.getElementById('login-popup')); $innerHTML('popupMsg', 'Sorry! This feature has not been added yet')">Login</span>
+        <span class="nav-links" title="This feature is not added yet" onclick="$displayManager(document.getElementById('login-popup'), new fade_args({elemID: 'login-popup', direction: 'middle', scale: 0.5, speed: 1, steps: 70})); $innerHTML('popupMsg', 'Sorry! This feature has not been added yet')">Login</span>
     </div>
     <div class="mobile-nav" id="mobile-nav">
-        <img class="mobile-menu" id="menu" src="{% static 'icons/menu_icon.png' %}" alt="Menu Icon" onclick="elementDisplaySwitcher(this, ['menu_icon.png', 'cancel_icon.png'], true); $displayManager(mobileMenu);">
+        <img class="mobile-menu" id="menu" src="{% static 'icons/menu_icon.png' %}" alt="Menu Icon" onclick="elementDisplaySwitcher(this, ['menu_icon.png', 'cancel_icon.png'], true); $displayManager(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'right', scale: 0, speed: 1, steps: 100}));">
     </div>
 </nav>
 
@@ -22,17 +22,17 @@
 <div class="hidden-menu" id="hiddenmenu" >
     <div id="pust-the-rest-down"></div>
     <div class="hidden-menu-top-headers">
-        <a class="nav-links" href="./" title="Go to Home page">Home</a>
+        <a href="./" title="Go to Home page">Home</a>
     </div>
     <div class="hidden-menu-top-headers">
-        <a class="nav-links" href="about" title="Go to About page">About</a>
+        <a href="about" title="Go to About page">About</a>
     </div>
     <div class="hidden-menu-top-headers">
-        <a class="nav-links" href="qgen" title="Generate your own custom quiz with Q-gen">Q-gen</a>
+        <a href="qgen" title="Generate your own custom quiz with Q-gen">Q-gen</a>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">Python</span>
-        <span class="menu" id="python-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">Python quiz 1</span>
+        <span class="side-menu-headers">Python</span>
+        <span class="menu" id="python-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">Python quiz 1</span>
         <span class="menu" id="python-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">Python quiz 2</span>
         <span class="menu" id="python-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">Python quiz 3</span>
         <span class="menu" id="python-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">Python quiz 4</span>
@@ -44,8 +44,8 @@
         <span class="menu" id="python-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">Python quiz 10</span>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">HTML</span>
-        <span class="menu" id="html-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">HTML quiz 1</span>
+        <span class="side-menu-headers">HTML</span>
+        <span class="menu" id="html-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">HTML quiz 1</span>
         <span class="menu" id="html-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">HTML quiz 2</span>
         <span class="menu" id="html-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">HTML quiz 3</span>
         <span class="menu" id="html-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">HTML quiz 4</span>
@@ -57,8 +57,8 @@
         <span class="menu" id="html-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">HTML quiz 10</span>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">JavaScript</span>
-        <span class="menu" id="javascript-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">JavaScript quiz 1</span>
+        <span class="side-menu-headers">JavaScript</span>
+        <span class="menu" id="javascript-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">JavaScript quiz 1</span>
         <span class="menu" id="javascript-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">JavaScript quiz 2</span>
         <span class="menu" id="javascript-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">JavaScript quiz 3</span>
         <span class="menu" id="javascript-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">JavaScript quiz 4</span>
@@ -70,8 +70,8 @@
         <span class="menu" id="javascript-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">JavaScript quiz 10</span>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">C++</span>
-        <span class="menu" id="c++-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">C++ quiz 1</span>
+        <span class="side-menu-headers">C++</span>
+        <span class="menu" id="c++-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">C++ quiz 1</span>
         <span class="menu" id="c++-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">C++ quiz 2</span>
         <span class="menu" id="c++-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">C++ quiz 3</span>
         <span class="menu" id="c++-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">C++ quiz 4</span>
@@ -83,8 +83,8 @@
         <span class="menu" id="c++-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">C++ quiz 10</span>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">Java</span>
-        <span class="menu" id="java-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">Java quiz 1</span>
+        <span class="side-menu-headers">Java</span>
+        <span class="menu" id="java-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">Java quiz 1</span>
         <span class="menu" id="java-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">Java quiz 2</span>
         <span class="menu" id="java-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">Java quiz 3</span>
         <span class="menu" id="java-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">Java quiz 4</span>
@@ -96,8 +96,8 @@
         <span class="menu" id="java-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">Java quiz 10</span>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">C</span>
-        <span class="menu" id="c-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">C quiz 1</span>
+        <span class="side-menu-headers">C</span>
+        <span class="menu" id="c-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">C quiz 1</span>
         <span class="menu" id="c-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">C quiz 2</span>
         <span class="menu" id="c-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">C quiz 3</span>
         <span class="menu" id="c-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">C quiz 4</span>
@@ -109,8 +109,8 @@
         <span class="menu" id="c-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">C quiz 10</span>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">PHP</span>
-        <span class="menu" id="php-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">PHP quiz 1</span>
+        <span class="side-menu-headers">PHP</span>
+        <span class="menu" id="php-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">PHP quiz 1</span>
         <span class="menu" id="php-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">PHP quiz 2</span>
         <span class="menu" id="php-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">PHP quiz 3</span>
         <span class="menu" id="php-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">PHP quiz 4</span>
@@ -122,8 +122,8 @@
         <span class="menu" id="php-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">PHP quiz 10</span>
     </div>
     <div class="sub-menu" onclick="showDropDown(this)">
-        <span class="side-menu-headers" id="h">CSS</span>
-        <span class="menu" id="css-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)">CSS quiz 1</span>
+        <span class="side-menu-headers">CSS</span>
+        <span class="menu" id="css-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">CSS quiz 1</span>
         <span class="menu" id="css-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">CSS quiz 2</span>
         <span class="menu" id="css-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">CSS quiz 3</span>
         <span class="menu" id="css-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">CSS quiz 4</span>
