@@ -76,11 +76,22 @@ popups = document.getElementsByClassName('popup');
         word.splice(0, 1, word[0].toUpperCase())
         return word.join('')
     }
+
+
+    function fade_args ({elemID, direction='top', scale=1, speed=10, steps=100, configScroll=false}) {
+        this.elemID = elemID;
+        this.direction = direction;
+        this.scale = scale;
+        this.speed = speed;
+        this.steps = steps;
+        this.configScroll = configScroll;
+    }
 }
 
 function screensizeDetector() {
-    let screenWidth = window.innerWidth;
-    if (screenWidth <= 480) {
+    console.log('screensize...')
+    let screenWidth = window.innerWidth, screenHeight = window.innerHeight;
+    if (screenWidth <= 480 || screenHeight <= 480) {
         non_mobile_nav.style.display = 'none';
         mobile_nav.style.display = 'block';
         sidemenu.style.display = 'none';
@@ -97,46 +108,33 @@ function screensizeDetector() {
         resetMenuForMobile();
     }
 
-    mainTag.style.marginLeft = screenWidth <= 700 ? 0: "230px";
+    mainTag.style.marginLeft = screenWidth <= 700 || screenHeight <= 480 ? 0: "230px";
 }
 
 
-function scaler(elemID, target=500) {
-    let elem = document.getElementById(elemID), default_scale;
-    if (window.innerWidth <= target) {
-        let x = window.innerWidth;
-        default_scale = 1 - 100/x*0.9; 
-        default_scale = (default_scale <= 0.5) ? 0.5: default_scale >= 1 ? 1: default_scale;
-        elem.style.transform = `scale(${default_scale})`;
-    } else {
-        elem.style.transform = 'scale(1)';
-    }
-}
-
-
-function handleScroll() {
-    let p_list = [];
-    for (i=0; i<popups.length; i++) {
-        p_list.push(popups[i].style.display);
-    }
-    if (p_list.includes('block')) {
-        document.body.style.overflow = 'hidden';
-    } else {
+function handleScroll(enable_scroll=true) {
+    if (enable_scroll) {
         document.body.style.overflow = '';
+    } else {
+        document.body.style.overflow = 'hidden';
     }
 }
 
 
 function typer() {
-    document.getElementById('typer-topic-link-id').href = qft_topics[qft_index];
-    if (typerTrigger) {
-        if (typerCount < msg.length) {
-            document.getElementById('typer-paragraph').innerHTML += msg[typerCount];
-            (typerCount == msg.length-1) ? setTimeout(typer, 5000):setTimeout(typer, 30);
-            typerCount++;
-        } else {
-            typerTrigger = false;
-            reloadTyper();
+    let typer_topic_link = document.getElementById('typer-topic-link-id'), 
+    typer_paragraph = document.getElementById('typer-paragraph');
+    if (typer_topic_link) {
+        typer_topic_link.href = qft_topics[qft_index];
+        if (typerTrigger) {
+            if (typerCount < msg.length) {
+                typer_paragraph.innerHTML += msg[typerCount];
+                (typerCount == msg.length-1) ? setTimeout(typer, 5000):setTimeout(typer, 30);
+                typerCount++;
+            } else {
+                typerTrigger = false;
+                reloadTyper();
+            }
         }
     }
 }
@@ -168,8 +166,15 @@ function reloadTyper() {
 
 
 function showDropDown(menu) {
-    let currentHeight = menu.style.height;
-    menu.style.height = (currentHeight == '390px') ? '34px':'390px';
+    let currentHeight = menu.style.height, course_title = menu.firstElementChild;
+    if (currentHeight == '390px') {
+        menu.style.height = course_title.style.height;
+        course_title.style.backgroundColor = ''
+    }
+    else {
+        menu.style.height = '390px';
+        course_title.style.backgroundColor = '#b4daff';
+    }
 }
 
 
@@ -178,7 +183,7 @@ function resetMenuForMobile() {
     img_file_path = img_file_path.split('/');
     img_file_path[img_file_path.length-1] = 'menu_icon.png'
     menuIcon.src = img_file_path.join('/');
-    $forceDisappear(mobileMenu);
+    $forceDisappear(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
 }
 
 
@@ -199,10 +204,96 @@ function resetMenuForMobile() {
     status = 'on'; //Timer trigger
 
 
-    function $displayManager(element) {
+    function fadeIn({elemID, direction='top', scale=1, speed=10, steps=100}) {
+        /**
+         * direction values: top, left, bottom, right, middle
+         */
+    
+        let intervalID, elem = document.getElementById(elemID), 
+        opc = 0, slideScale = (direction == 'top') | (direction == 'left') ? -100: 100, 
+        sld_interval = slideScale < 0 ? 1: -1, opc_interval = interval(0, 1, steps), scl_interval = interval(scale, 1, steps);
+        elem.style.opacity = 0;
+        // elem.style.transform = setscale(elem.style.transform, `scale(${scale})`);
+        elem.style.display = 'block';
+        intervalID = setInterval(show, speed);
+        function show() {
+            if (opc >= 1) {
+                clearInterval(intervalID);
+            } else {
+                opc = Number((opc + opc_interval).toFixed(3));
+                slideScale = Number((slideScale + sld_interval).toFixed(3));
+                scale = Number((scale + scl_interval).toFixed(3));
+                elem.style.opacity = opc;
+                if (direction == 'top' | direction == 'bottom') {
+                    elem.style.transform = `translateY(${slideScale}%) scale(${scale})`;
+                } else if (direction == 'left' | direction == 'right') {
+                    elem.style.transform = `translateX(${slideScale}%) scale(${scale})`;
+                } else {
+                    elem.style.transform = `scale(${scale})`;
+                }
+            }
+        }
+    }
+    
+    
+    function fadeOut({elemID, direction='top', scale=1, speed=10, steps=100, configScroll=false}) {
+        /**
+         * direction values: top, left, bottom, right, middle
+         */
+
+        let intervalID, elem = document.getElementById(elemID), 
+        opc = 1, slideScale = 0, //(direction == 'top') || (direction == 'left') ? -100: 100, 
+        sld_interval = slideScale < 0 ? 1: -1, opc_interval = interval(0, 1, steps), 
+        scl_interval = interval(scale, 1, steps), current_scale = 1;
+    
+        if (configScroll) { document.body.style.overflow = ''; }
+        intervalID = setInterval(show, speed);
+        function show() {
+            if (opc <= 0) {
+                elem.style.display = 'none';
+                clearInterval(intervalID);
+            } else {
+                opc = Number((opc - opc_interval).toFixed(3));
+                slideScale = Number((slideScale - sld_interval).toFixed(3));
+                current_scale = Number((current_scale - scl_interval).toFixed(3));
+                elem.style.opacity = opc;
+                if (direction == 'top' || direction == 'bottom') {
+                    elem.style.transform = `translateY(${slideScale}%) scale(${current_scale})`;
+                } else if (direction == 'left' || direction == 'right') {
+                    elem.style.transform = `translateX(${slideScale}%) scale(${current_scale})`;
+                } else {
+                    elem.style.transform = `scale(${current_scale})`;
+                }
+            }
+        }
+    }
+    
+    
+    function interval(initial=0, stop=0, steps=100) {
+        /**
+         * no argument will return no interval eg. 0
+         */
+        let var_interval = (stop - initial) / steps;
+        return var_interval;
+    }
+
+
+    function $displayManager(element, fade_arguments={}) {
+        /**
+         * MAKE SURE OF NECESSARY ARGUMENTS
+         * exp. fade_arguments = new fade_args({elemID: id, direction: 'middle', scale: 0.5, speed: 1, steps: 70})
+         */
         let display = element.style.display;
-        element.style.display = (display == 'none' | display == '') ? 'block': 'none';
-        handleScroll();
+        if (Object.keys(fade_arguments).length) {
+            let animate = (display == 'none' || display == '') ? (function(){fadeIn(fade_arguments); handleScroll(false);}): (function(){fadeOut(fade_arguments); handleScroll();});
+            animate();
+        } else {
+            if (display == 'none' || display == '') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
     }
 
 
@@ -212,8 +303,16 @@ function resetMenuForMobile() {
     }
 
 
-    function $forceDisappear(element) {
-        element.style.display = 'none';
+    function $forceDisappear(element, fade_arguments={}) {
+        /**
+         * if fade_arguments is not null, then it must be an anonymous function
+         * with argument elementID eg. (function(elementID){})
+         */
+        if (Object.keys(fade_arguments).length) {
+            fadeOut(fade_arguments);
+        } else {
+            element.style.display = 'none';
+        }
         handleScroll();
     }
     
@@ -259,7 +358,7 @@ function resetMenuForMobile() {
 
     var for_quizSubmit = () => {
         quizAnalyzer();
-        $displayManager(document.getElementById('result-background'));
+        $displayManager(document.getElementById('result-background'), new fade_args({elemID: 'result-background', direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
         elementDisplaySwitcher(document.getElementById('submit-btn-container'), document.getElementById('after-quiz-btns'));
     }
 
@@ -336,12 +435,12 @@ function resetMenuForMobile() {
     function quizManager(element, non_qgen_notice=false) {
         quizAnalyzer(element, non_qgen_notice);
         quizNavigator(element);
-        $displayManager(quizDescription);
+        $displayManager(quizDescription, new fade_args({elemID: quizDescription.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
     }
 
     function mobileMenuLinksEventsManager(element, non_qgen_notice=false) {
         quizManager(element, non_qgen_notice); 
-        $forceDisappear(mobileMenu); 
+        $forceDisappear(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'middle', scale: 1, speed: 1, steps: 100})); 
         elementDisplaySwitcher(menuIcon, ['menu_icon.png', 'cancel_icon.png'], true);
     }
 
@@ -402,7 +501,7 @@ function resetMenuForMobile() {
 
         document.getElementById(course).innerHTML = cap(course);
         document.getElementById(new_description_id).innerHTML = description.length <= 75 ? description : "ERROR!!! LENGTH MUST BE 75 OR BELOW";
-        courseCover.style.background = `url('static/img/${img}') center`;
+        courseCover.style.backgroundImage = `url('static/img/${img}')`;
         courseCover.style.backgroundSize = "auto 100%";
     }
 }
@@ -421,7 +520,7 @@ function resetMenuForMobile() {
     } else if (initiatFeedbackEmailBox == 'off') {
         $innerHTML('feed_popupMsg', 'This email already exists, you might have had a conversion \
         with koders.notify.gh@gmail.com, get to your gmail and continue feedbacks from there');
-        $displayManager(document.getElementById('feed_popup'));
+        $displayManager(document.getElementById('feed_popup'), new fade_args({elemID: 'feed_popup', direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
     }
 }
 
@@ -449,8 +548,9 @@ window.onscroll = () => {
         }
     }
 
-    if (scrollCoords > 700) {
+    if (scrollCoords >= 700) {
         to_top_btn.style.display = "block";
+        
     } else {
         to_top_btn.style.display = "none";
     }
@@ -478,12 +578,11 @@ for (i=0; i<resultPopupBox.length; i++) {
         (function(index) {
 
             courseButton[index].addEventListener('click', function() {
-                console.log('button has been clicked....');
+                // console.log('button has been clicked....');
             })
 
 
             courseHiddenCover[index].addEventListener('click', function(e) {
-                console.log('hello');
                 if (e.type == 'click') {
                     if (!eventType) {
                         hovered = courseHiddenCover[index].style.top == '' ? false: true;

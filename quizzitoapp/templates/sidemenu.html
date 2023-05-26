@@ -7,7 +7,7 @@
     {% with course_list="Python,HTML,JavaScript,C++,Java,C,PHP,CSS"|make_a_list %} 
         {% for i in course_list %} 
             <div class="sub-menu" onclick="showDropDown(this)">
-                <span class="side-menu-headers" id="h">{{ i }}</span>
+                <span class="side-menu-headers">{{ i }}</span>
                 {% for count in 1|loop:11 %}
                     <span class="menu" id="{{ i|lower }}-quiz-{{ count }}" onclick="mobileMenuLinksEventsManager(this, true)">{{ i }} quiz {{ count }}</span>
                 {% endfor %}

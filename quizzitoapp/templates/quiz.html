@@ -50,7 +50,7 @@ Qgen, Quiz generator, Demiz{% endblock %}
                     value="{{ opt1 }}" {% if selected_ans|checkQuizSubmit and opt1 == selected_opt %} checked {% endif %}>
                     <label 
                     class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionA" 
-                    style="color:{{optAColor}};"><span>{{ opt1 }}</span></label><br>
+                    style="color:{{optAColor}};"><span class="option-value">{{ opt1 }}</span></label><br>
                         
 
                     <input 
@@ -59,7 +59,7 @@ Qgen, Quiz generator, Demiz{% endblock %}
                     value="{{ opt2 }}" {% if selected_ans|checkQuizSubmit and opt2 == selected_opt %} checked {% endif %}>
                     <label 
                     class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionB" 
-                    style="color:{{optBColor}};"><span>{{ opt2 }}</span></label><br>
+                    style="color:{{optBColor}};"><span class="option-value">{{ opt2 }}</span></label><br>
 
 
                     <input 
@@ -68,7 +68,7 @@ Qgen, Quiz generator, Demiz{% endblock %}
                     value="{{ opt3 }}" {% if selected_ans|checkQuizSubmit and opt3 == selected_opt %} checked {% endif %}>
                     <label 
                     class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionC" 
-                    style="color:{{optCColor}};"><span>{{ opt3 }}</span></label><br>
+                    style="color:{{optCColor}};"><span class="option-value">{{ opt3 }}</span></label><br>
 
 
                     <input 
@@ -77,7 +77,7 @@ Qgen, Quiz generator, Demiz{% endblock %}
                     value="{{ opt4 }}" {% if selected_ans|checkQuizSubmit and opt4 == selected_opt %} checked {% endif %}>
                     <label 
                     class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionD" 
-                    style="color:{{optDColor}};"><span>{{ opt4}}</span></label><br>
+                    style="color:{{optDColor}};"><span class="option-value">{{ opt4}}</span></label><br>
 
                 </div>
             {% endwith %}
@@ -94,7 +94,7 @@ Qgen, Quiz generator, Demiz{% endblock %}
         <a href="#" onclick="tryAgainQuiz(); //this.href = window.location.href">
             <button class="style1-btn try-again-btn" title="Attempt this quiz again">Try Again</button>
         </a>
-        <button class="style1-btn result-btn" onclick="$displayManager(quizResult)">Result &gt&gt</button>
+        <button class="style1-btn result-btn" onclick="$displayManager(quizResult, new fade_args({elemID: quizResult.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}))">Result &gt&gt</button>
     </div>
     <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
 

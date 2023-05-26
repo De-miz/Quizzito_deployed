@@ -14,14 +14,24 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
 
 
 <span hidden>
-    {% block HOME_PAGE_SCRIPT %}<script src="{% static 'scripts/index.js' %}"></script>{% endblock %}
-    {% block body_attr %}onresize="screensizeDetector();"{% endblock %}
+    <!-- {% block HOME_PAGE_SCRIPT %}<script src="{% static 'scripts/index.js' %}"></script>{% endblock %} -->
+    {% block body_attr %}
+        onresize="screensizeDetector();" 
+        onload="$addNewCourse('Python', 'Python is not a programming language, True or False?', 'images.jpeg');
+        $addNewCourse('HTML', 'Is HTML5 supported by all browsers? let\'s find out', 'html.jpg');
+        $addNewCourse('JavaScript', 'Is JavaScript easy to start with or very difficult?', 'javascript-logo-1.png');
+        $addNewCourse('CSS', 'Is CSS a programming language or markup? let\'s find out', 'css_back.webp');
+        $addNewCourse('C', 'C is one of the prefered languages for Data Analytics, is this true?', 'c.jpg');
+        $addNewCourse('C++', 'Do you know C++ is not the best language for gaming? what\'d you think...', 'c++_background.png');
+        $addNewCourse('Java', 'Is it true Java is one of the prefered languages for web development?', 'java.png');
+        $addNewCourse('PHP', 'PHP is a server-side scripting language designed for web development.', 'php.jpg');"
+    {% endblock %}
 </span> 
 
 {% block CONTENT %}
     <div class="welcome-remark">
-        <h1>WELCOME TO QUIZZITO</h1>
-        <p>
+        <h1 class="welcome-remark-heading">WELCOME TO QUIZZITO</h1>
+        <p id="welcome-remark-paragraph">
             where you examine yourself to know how good you are in 
             some programming languages.
         </p>
@@ -32,8 +42,8 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
     <div class='typer-main-section'>
         <div class="box1">
             <div class="typer-main-section-intro">
-                <h1>Why Quiz?</h1>
-                <p>
+                <h1 id="why-quiz-heading">Why Quiz?</h1>
+                <p id="why-quiz-paragraph">
                     Quizzes serve as an effective assessment tool that 
                     can help to reinforce learning and motivate learners to engage with the material.
                 </p>
@@ -42,7 +52,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
 
         <div class="box2">
             <div class="typer-section">
-                <p class="typer-paragraph" id="typer-paragraph"></p>
+                <p class="typer-paragraph" id="typer-paragraph" name="typer-paragraph"></p>
                 <div align="center">
                     <a id="typer-topic-link-id" href="php-quiz-1">
                         <button id="typer-btn" onclick="stopTyper()">Answer >></button>
@@ -67,7 +77,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
     <!-- Qgen Section (Home Page) -->
     <div class="qgen-div">
         <div class="qgen-div-cover">
-            <p>
+            <p id="qgen-quote1">
                 Q-gen is a quiz generator that allows users customize their quizzes, with 
                 Q-gen you can generate your own custom quiz by spicifying the amount of 
                 questions you want and the difficult level of the quiz.
