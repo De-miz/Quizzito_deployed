@@ -89,7 +89,6 @@ popups = document.getElementsByClassName('popup');
 }
 
 function screensizeDetector() {
-    console.log('screensize...')
     let screenWidth = window.innerWidth, screenHeight = window.innerHeight;
     if (screenWidth <= 480 || screenHeight <= 480) {
         non_mobile_nav.style.display = 'none';
@@ -113,6 +112,7 @@ function screensizeDetector() {
 
 
 function handleScroll(enable_scroll=true) {
+    console.log('scroll')
     if (enable_scroll) {
         document.body.style.overflow = '';
     } else {
@@ -129,11 +129,11 @@ function typer() {
         if (typerTrigger) {
             if (typerCount < msg.length) {
                 typer_paragraph.innerHTML += msg[typerCount];
-                (typerCount == msg.length-1) ? setTimeout(typer, 5000):setTimeout(typer, 30);
+                (typerCount == msg.length-1) ? setTimeout(typer, 100):setTimeout(typer, 30);
                 typerCount++;
             } else {
                 typerTrigger = false;
-                reloadTyper();
+                setTimeout(reloadTyper, 5000)
             }
         }
     }
@@ -167,12 +167,12 @@ function reloadTyper() {
 
 function showDropDown(menu) {
     let currentHeight = menu.style.height, course_title = menu.firstElementChild;
-    if (currentHeight == '390px') {
+    if (currentHeight == '410px') {
         menu.style.height = course_title.style.height;
         course_title.style.backgroundColor = ''
     }
     else {
-        menu.style.height = '390px';
+        menu.style.height = '410px';
         course_title.style.backgroundColor = '#b4daff';
     }
 }
@@ -204,78 +204,98 @@ function resetMenuForMobile() {
     status = 'on'; //Timer trigger
 
 
-    function fadeIn({elemID, direction='top', scale=1, speed=10, steps=100}) {
-        /**
-         * direction values: top, left, bottom, right, middle
-         */
+    // function fadeIn({elemID, direction='top', scale=1, speed=10, steps=100}) {
+    //     /**
+    //      * ONLY DIRECTION RIGHT AND MIDDLE BEIGN SUPPORTED AT THE MOMMENT
+    //      * This function isn't recommended at the moment, avoid usage, why? because demiz says so [`cool emoji`]
+    //      * direction values: top, left, bottom, right, middle
+    //      */
     
-        let intervalID, elem = document.getElementById(elemID), 
-        opc = 0, slideScale = (direction == 'top') | (direction == 'left') ? -100: 100, 
-        sld_interval = slideScale < 0 ? 1: -1, opc_interval = interval(0, 1, steps), scl_interval = interval(scale, 1, steps);
-        elem.style.opacity = 0;
-        // elem.style.transform = setscale(elem.style.transform, `scale(${scale})`);
-        elem.style.display = 'block';
-        intervalID = setInterval(show, speed);
-        function show() {
-            if (opc >= 1) {
-                clearInterval(intervalID);
-            } else {
-                opc = Number((opc + opc_interval).toFixed(3));
-                slideScale = Number((slideScale + sld_interval).toFixed(3));
-                scale = Number((scale + scl_interval).toFixed(3));
-                elem.style.opacity = opc;
-                if (direction == 'top' | direction == 'bottom') {
-                    elem.style.transform = `translateY(${slideScale}%) scale(${scale})`;
-                } else if (direction == 'left' | direction == 'right') {
-                    elem.style.transform = `translateX(${slideScale}%) scale(${scale})`;
-                } else {
-                    elem.style.transform = `scale(${scale})`;
-                }
-            }
-        }
-    }
+    //     let intervalID, elem = document.getElementById(elemID), 
+    //     opc = 0, slideScale = (direction == 'top') || (direction == 'left') ? -100: 100, 
+    //     sld_interval = slideScale < 0 ? insterval(0, slideScale, steps): interval(slideScale, 0, steps), opc_interval = interval(0, 1, steps), scl_interval = interval(scale, 1, steps);
+    //     elem.style.opacity = 0;
+    //     elem.style.display = 'block';
+    //     intervalID = setInterval(show, speed);
+    //     function show() {
+    //         if (opc >= 1) {
+    //             clearInterval(intervalID);
+    //         } else {
+    //             opc = Number((opc + opc_interval).toFixed(3));
+    //             slideScale = setLimit(Number((slideScale + sld_interval).toFixed(3)), 0, -1);
+    //             scale = setLimit(Number((scale + scl_interval).toFixed(3)), 1);
+    //             elem.style.opacity = opc;
+    //             if (direction == 'top' || direction == 'bottom') {
+    //                 elem.style.transform = `translateY(${slideScale}%) scale(${scale})`;
+    //             } else if (direction == 'left' || direction == 'right') {
+    //                 elem.style.transform = `translateX(${slideScale}%) scale(${scale})`;
+    //             } else {
+    //                 elem.style.transform = `scale(${scale})`;
+    //             }
+    //         }
+    //     }
+    // }
     
     
-    function fadeOut({elemID, direction='top', scale=1, speed=10, steps=100, configScroll=false}) {
-        /**
-         * direction values: top, left, bottom, right, middle
-         */
+    // function fadeOut({elemID, direction='top', scale=1, speed=10, steps=100, configScroll=false}) {
+    //     /**
+    //      * ONLY DIRECTION RIGHT AND MIDDLE BEIGN SUPPORTED AT THE MOMMENT
+    //      * This function isn't recommended at the moment, avoid usage, why? because demiz says so [`cool emoji`]
+    //      * direction values: top, left, bottom, right, middle
+    //      */
 
-        let intervalID, elem = document.getElementById(elemID), 
-        opc = 1, slideScale = 0, //(direction == 'top') || (direction == 'left') ? -100: 100, 
-        sld_interval = slideScale < 0 ? 1: -1, opc_interval = interval(0, 1, steps), 
-        scl_interval = interval(scale, 1, steps), current_scale = 1;
+    //     let intervalID, elem = document.getElementById(elemID), 
+    //     opc = 1, slideScale = interval(-1, 0, steps), //(direction == 'top') || (direction == 'left') ? -100: 100, 
+    //     sld_interval = interval(100, 0, steps), opc_interval = interval(0, 1, steps), 
+    //     scl_interval = interval(scale, 1, steps), current_scale = 1;
     
-        if (configScroll) { document.body.style.overflow = ''; }
-        intervalID = setInterval(show, speed);
-        function show() {
-            if (opc <= 0) {
-                elem.style.display = 'none';
-                clearInterval(intervalID);
-            } else {
-                opc = Number((opc - opc_interval).toFixed(3));
-                slideScale = Number((slideScale - sld_interval).toFixed(3));
-                current_scale = Number((current_scale - scl_interval).toFixed(3));
-                elem.style.opacity = opc;
-                if (direction == 'top' || direction == 'bottom') {
-                    elem.style.transform = `translateY(${slideScale}%) scale(${current_scale})`;
-                } else if (direction == 'left' || direction == 'right') {
-                    elem.style.transform = `translateX(${slideScale}%) scale(${current_scale})`;
-                } else {
-                    elem.style.transform = `scale(${current_scale})`;
-                }
-            }
-        }
-    }
+    //     if (configScroll) { document.body.style.overflow = ''; }
+    //     intervalID = setInterval(show, speed);
+    //     function show() {
+    //         if (opc <= 0) {
+    //             elem.style.display = 'none';
+    //             clearInterval(intervalID);
+    //         } else {
+    //             opc = Number((opc - opc_interval).toFixed(3));
+    //             slideScale = Number((slideScale - sld_interval).toFixed(3));
+    //             current_scale = setLimit(Number((current_scale - scl_interval).toFixed(3)), 0, -1);
+    //             elem.style.opacity = opc;
+    //             if (direction == 'top' || direction == 'bottom') {
+    //                 elem.style.transform = `translateY(${slideScale}%) scale(${current_scale})`;
+    //             } else if (direction == 'left' || direction == 'right') {
+    //                 elem.style.transform = `translateX(${slideScale}%) scale(${current_scale})`;
+    //             } else {
+    //                 elem.style.transform = `scale(${current_scale})`;
+    //             }
+    //         }
+    //     }
+    // }
     
+
+    // function setLimit(value, limit, gt_or_lt = 1) {
+    //     /**
+    //      * gt_or_lt (greater than or less than): this value must be 1, or -1
+    //      */
+    //     if (gt_or_lt > 0) {
+    //         if (value >= limit) {
+    //             return limit
+    //         }
+    //     } else {
+    //         if (value <= limit) {
+    //             return limit
+    //         }
+    //     }
+    //     return value
+    // }
+
     
-    function interval(initial=0, stop=0, steps=100) {
-        /**
-         * no argument will return no interval eg. 0
-         */
-        let var_interval = (stop - initial) / steps;
-        return var_interval;
-    }
+    // function interval(initial=0, stop=0, steps=100) {
+    //     /**
+    //      * no argument will return no interval eg. 0
+    //      */
+    //     let var_interval = (stop - initial) / steps;
+    //     return var_interval;
+    // }
 
 
     function $displayManager(element, fade_arguments={}) {
@@ -285,7 +305,7 @@ function resetMenuForMobile() {
          */
         let display = element.style.display;
         if (Object.keys(fade_arguments).length) {
-            let animate = (display == 'none' || display == '') ? (function(){fadeIn(fade_arguments); handleScroll(false);}): (function(){fadeOut(fade_arguments); handleScroll();});
+        let animate = (display == 'none' || display == '') ? (function(){fadeIn(fade_arguments); /*handleScroll(false);*/}): (function(){fadeOut(fade_arguments); /*handleScroll();*/});
             animate();
         } else {
             if (display == 'none' || display == '') {
@@ -313,7 +333,7 @@ function resetMenuForMobile() {
         } else {
             element.style.display = 'none';
         }
-        handleScroll();
+        // handleScroll();
     }
     
 
@@ -358,7 +378,7 @@ function resetMenuForMobile() {
 
     var for_quizSubmit = () => {
         quizAnalyzer();
-        $displayManager(document.getElementById('result-background'), new fade_args({elemID: 'result-background', direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
+        $displayManager(document.getElementById('result-background'), new fade_args({elemID: 'result-background', direction: 'middle', scale: 0.5, speed: 1, steps: 30}));
         elementDisplaySwitcher(document.getElementById('submit-btn-container'), document.getElementById('after-quiz-btns'));
     }
 
@@ -435,12 +455,12 @@ function resetMenuForMobile() {
     function quizManager(element, non_qgen_notice=false) {
         quizAnalyzer(element, non_qgen_notice);
         quizNavigator(element);
-        $displayManager(quizDescription, new fade_args({elemID: quizDescription.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
+        $displayManager(quizDescription, new fade_args({elemID: quizDescription.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}));
     }
 
     function mobileMenuLinksEventsManager(element, non_qgen_notice=false) {
         quizManager(element, non_qgen_notice); 
-        $forceDisappear(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'middle', scale: 1, speed: 1, steps: 100})); 
+        $forceDisappear(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'middle', scale: 1, speed: 1, steps: 30})); 
         elementDisplaySwitcher(menuIcon, ['menu_icon.png', 'cancel_icon.png'], true);
     }
 
@@ -520,7 +540,7 @@ function resetMenuForMobile() {
     } else if (initiatFeedbackEmailBox == 'off') {
         $innerHTML('feed_popupMsg', 'This email already exists, you might have had a conversion \
         with koders.notify.gh@gmail.com, get to your gmail and continue feedbacks from there');
-        $displayManager(document.getElementById('feed_popup'), new fade_args({elemID: 'feed_popup', direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
+        $displayManager(document.getElementById('feed_popup'), new fade_args({elemID: 'feed_popup', direction: 'middle', scale: 0.5, speed: 1, steps: 30}));
     }
 }
 
@@ -550,9 +570,12 @@ window.onscroll = () => {
 
     if (scrollCoords >= 700) {
         to_top_btn.style.display = "block";
+        to_top_btn.style.bottom = '10px';
+        to_top_btn.style.opacity = '1'
         
     } else {
-        to_top_btn.style.display = "none";
+        to_top_btn.style.bottom = '-70px';
+        to_top_btn.style.opacity = '0'
     }
 }
 
