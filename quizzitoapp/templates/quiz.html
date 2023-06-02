@@ -1,3 +1,5 @@
+<!-- messed with by Demiz -->
+
 {% extends 'master_template.html' %}
 {% load static %}
 {% load demiztags %}
@@ -91,10 +93,8 @@ Qgen, Quiz generator, Demiz{% endblock %}
 
     <div align="center" id="after-quiz-btns">
         <a href="../"><button class="style1-btn home-btn" title="Go back to home page">&lt&lt Home</button></a>
-        <a href="#" onclick="tryAgainQuiz(); //this.href = window.location.href">
-            <button class="style1-btn try-again-btn" title="Attempt this quiz again">Try Again</button>
-        </a>
-        <button class="style1-btn result-btn" onclick="$displayManager(quizResult, new fade_args({elemID: quizResult.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}))">Result &gt&gt</button>
+        <a href="#" onclick="tryAgainQuiz();"><button class="style1-btn try-again-btn" title="Attempt this quiz again">Try Again</button></a>
+        <button class="style1-btn result-btn" onclick="$displayManager(quizResult, new fade_args({elemID: quizResult.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">Result &gt&gt</button>
     </div>
     <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
 

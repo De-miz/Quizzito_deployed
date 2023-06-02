@@ -1,3 +1,5 @@
+<!-- messed with by Demiz -->
+
 {% extends 'master_template.html' %}
 {% load static %}
 {% load demiztags %}
@@ -84,5 +86,17 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
                 <br><a href="qgen"><button class="qgen-btn">Get Started</button></a>
             </p>
         </div>
+    </div>
+
+    <!-- Footer Form -->
+    <div class="feedback-sec">
+        <form id="footer-form" action="feedback" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 id="feedback-heading">Feedback</h1>
+            <div id="feedback-input-container">
+                <input id="feedback_email_input" type="email" name="feedback_email" id="" placeholder="email address" title="enter email address" required>
+                <button id="feedback-btn" type="submit" title="submit email to write feedback">SUBMIT</button>
+            </div>
+        </form>
     </div>
 {% endblock %}

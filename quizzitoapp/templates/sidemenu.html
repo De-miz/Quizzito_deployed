@@ -1,3 +1,5 @@
+<!-- messed with by Demiz -->
+
 {% load static %}
 {% load demiztags %}
 
@@ -9,7 +11,10 @@
             <div class="sub-menu" onclick="showDropDown(this)">
                 <span class="side-menu-headers">{{ i }}</span>
                 {% for count in 1|loop:11 %}
-                    <span class="menu" id="{{ i|lower }}-quiz-{{ count }}" onclick="mobileMenuLinksEventsManager(this, true)">{{ i }} quiz {{ count }}</span>
+                    <span class="menu" id="{{ i|lower }}-quiz-{{ count }}" 
+                    onclick="mobileMenuLinksEventsManager(this, true)" {% if count == 1 %}  name="first-menu" {% endif %}>
+                        {{ i }} quiz {{ count }}
+                    </span>
                 {% endfor %}
             </div>
         {% endfor %}
