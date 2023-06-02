@@ -1,0 +1,6 @@
+/try/*
+/Quizzito/settings.py
+/Quizzito/__pycache__/*
+/quizzitoapp/__pycache__/*
+/quizzitoapp/templatetags/__pycache__/*
+/quizzitoapp/migrations/*
