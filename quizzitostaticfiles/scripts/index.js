@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     perfectScaler();
     screensizeDetector(); 
     typer(); 
+    scaler('login-popup-main-box');
     // $addNewCourse('Python', 'Python is not a programming language, True or False?', 'images.jpeg');
     // $addNewCourse('HTML', 'Is HTML5 supported by all browsers? let\'s find out', 'html.jpg');
     // $addNewCourse('JavaScript', 'Is JavaScript easy to start with or very difficult?', 'javascript-logo-1.png');

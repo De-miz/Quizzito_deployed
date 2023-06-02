@@ -29,7 +29,8 @@ scaleItems = new Map( // Make sure to add ALL necessary attributes
                 new elemObject({name: 'about-page-headings', fontsize: '2.5em'}), 
                 new elemObject({name: 'about-page-parags', fontsize: '2em', reduce_size: '3 / 10'}), 
                 new elemObject({name: 'myself-header', fontsize: '2em', reduce_size: '1.5 / 10'}), 
-                new elemObject({name: 'myself-para', fontsize: '1.4em', reduce_size: '1 / 5'})
+                new elemObject({name: 'myself-para', fontsize: '1.4em', reduce_size: '1 / 5'}), 
+                new elemObject({name: 'style1-btn', fontsize: '1.2em', padding: '15px 50px', reduce_size: '1 / 5'})
             ]
         ], 
         [
@@ -44,6 +45,10 @@ scaleItems = new Map( // Make sure to add ALL necessary attributes
                     new elemObject({name: 'qgen-btn', fontsize: '1.1em', padding: '20px 50px', reduce_size: '1.3 / 10'}), 
                     new elemObject({name: 'welcome-to-qgen', fontsize: '2.4em'}), 
                     new elemObject({name: 'submit-btn', fontsize: '1.2em', padding: '15px 50px'}),
+                    new elemObject({name: 'footer-form', padding: '80px 0px 130px 0px', reduce_size: '1 / 2'}), 
+                    new elemObject({name: 'feedback-heading', fontsize: '3em', reduce_size: '3 / 10'}), 
+                    new elemObject({name: 'feedback_email_input', fontsize: '1.5em', padding: '20px 175px 20px 20px', reduce_size: '1.5 / 10'}), 
+                    new elemObject({name: 'feedback-btn', padding: '20px 50px', reduce_size: '1.5 / 10'})
                 ]
             )
         ], 
@@ -283,6 +288,101 @@ function closeLoader() {
 }
 
 
+{
+    function fadeIn({elemID, direction='top', scale=1, speed=10, steps=100}) {
+        /**
+         * ONLY DIRECTION RIGHT AND MIDDLE BEIGN SUPPORTED AT THE MOMMENT
+         * This function isn't recommended at the moment, avoid usage, why? because demiz says so [`cool emoji`]
+         * direction values: top, left, bottom, right, middle
+         */
+    
+        let intervalID, elem = document.getElementById(elemID), 
+        opc = 0, slideScale = (direction == 'top') || (direction == 'left') ? -100: 100, 
+        sld_interval = slideScale < 0 ? insterval(0, slideScale, steps): interval(slideScale, 0, steps), opc_interval = interval(0, 1, steps), scl_interval = interval(scale, 1, steps);
+        elem.style.opacity = 0;
+        elem.style.display = 'block';
+        intervalID = setInterval(show, speed);
+        function show() {
+            if (opc >= 1) {
+                clearInterval(intervalID);
+            } else {
+                opc = Number((opc + opc_interval).toFixed(3));
+                slideScale = setLimit(Number((slideScale + sld_interval).toFixed(3)), 0, -1);
+                scale = setLimit(Number((scale + scl_interval).toFixed(3)), 1);
+                elem.style.opacity = opc;
+                if (direction == 'top' || direction == 'bottom') {
+                    elem.style.transform = `translateY(${slideScale}%) scale(${scale})`;
+                } else if (direction == 'left' || direction == 'right') {
+                    elem.style.transform = `translateX(${slideScale}%) scale(${scale})`;
+                } else {
+                    elem.style.transform = `scale(${scale})`;
+                }
+            }
+        }
+    }
+    
+    
+    function fadeOut({elemID, direction='top', scale=1, speed=10, steps=100, configScroll=false}) {
+        /**
+         * ONLY DIRECTION RIGHT AND MIDDLE BEIGN SUPPORTED AT THE MOMMENT
+         * This function isn't recommended at the moment, avoid usage, why? because demiz says so [`cool emoji`]
+         * direction values: top, left, bottom, right, middle
+         */
+
+        let intervalID, elem = document.getElementById(elemID), 
+        opc = 1, slideScale = interval(-1, 0, steps), //(direction == 'top') || (direction == 'left') ? -100: 100, 
+        sld_interval = interval(100, 0, steps), opc_interval = interval(0, 1, steps), 
+        scl_interval = interval(scale, 1, steps), current_scale = 1;
+    
+        if (configScroll) { document.body.style.overflow = ''; }
+        intervalID = setInterval(show, speed);
+        function show() {
+            if (opc <= 0) {
+                elem.style.display = 'none';
+                clearInterval(intervalID);
+            } else {
+                opc = Number((opc - opc_interval).toFixed(3));
+                slideScale = Number((slideScale - sld_interval).toFixed(3));
+                current_scale = setLimit(Number((current_scale - scl_interval).toFixed(3)), 0, -1);
+                elem.style.opacity = opc;
+                if (direction == 'top' || direction == 'bottom') {
+                    elem.style.transform = `translateY(${slideScale}%) scale(${current_scale})`;
+                } else if (direction == 'left' || direction == 'right') {
+                    elem.style.transform = `translateX(${slideScale}%) scale(${current_scale})`;
+                } else {
+                    elem.style.transform = `scale(${current_scale})`;
+                }
+            }
+        }
+    }
+    
+
+    function setLimit(value, limit, gt_or_lt = 1) {
+        /**
+         * gt_or_lt (greater than or less than): this value must be 1, or -1
+         */
+        if (gt_or_lt > 0) {
+            if (value >= limit) {
+                return limit
+            }
+        } else {
+            if (value <= limit) {
+                return limit
+            }
+        }
+        return value
+    }
+
+    
+    function interval(initial=0, stop=0, steps=100) {
+        /**
+         * no argument will return no interval eg. 0
+         */
+        let var_interval = (stop - initial) / steps;
+        return var_interval;
+    }
+}
+
 
 // EVENTS
 
@@ -297,7 +397,7 @@ window.addEventListener('load', () => {
     closeLoader();
     scaler('result-background-main-box');
     scaler('quiz-description-background-main-box');
-    scaler('login-popup-main-box');
+    // scaler('login-popup-main-box');  Already present in index.js
     scaler('feed-popup-main-box');
 });
 
