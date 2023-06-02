@@ -1,0 +1,102 @@
+<!-- messed with by Demiz -->
+
+{% extends 'master_template.html' %}
+{% load static %}
+{% load demiztags %}
+
+<!-- META TAGS -->
+{% block DESCRIPTION %}Quizzes serve as an effective assessment tool that 
+can help to reinforce learning and motivate learners to engage with the material.{% endblock %}
+
+{% block KEYWORDS %}Quizzito, Quiz, Python quiz, Java quiz, C quiz, HTML quiz, 
+CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, Demiz{% endblock %}
+
+{% block PAGE_TITLE %}Quizzito{% endblock %}
+<!-- META TAGS ends here -->
+
+
+<span hidden>
+    <!-- {% block HOME_PAGE_SCRIPT %}<script src="{% static 'scripts/index.js' %}"></script>{% endblock %} -->
+    {% block body_attr %}
+        onresize="screensizeDetector();" 
+        onload="$addNewCourse('Python', 'Python is not a programming language, True or False?', 'images.jpeg');
+        $addNewCourse('HTML', 'Is HTML5 supported by all browsers? let\'s find out', 'html.jpg');
+        $addNewCourse('JavaScript', 'Is JavaScript easy to start with or very difficult?', 'javascript-logo-1.png');
+        $addNewCourse('CSS', 'Is CSS a programming language or markup? let\'s find out', 'css_back.webp');
+        $addNewCourse('C', 'C is one of the prefered languages for Data Analytics, is this true?', 'c.jpg');
+        $addNewCourse('C++', 'Do you know C++ is not the best language for gaming? what\'d you think...', 'c++_background.png');
+        $addNewCourse('Java', 'Is it true Java is one of the prefered languages for web development?', 'java.png');
+        $addNewCourse('PHP', 'PHP is a server-side scripting language designed for web development.', 'php.jpg');"
+    {% endblock %}
+</span> 
+
+{% block CONTENT %}
+    <div class="welcome-remark">
+        <h1 class="welcome-remark-heading">WELCOME TO QUIZZITO</h1>
+        <p id="welcome-remark-paragraph">
+            where you examine yourself to know how good you are in 
+            some programming languages.
+        </p>
+        <div id="hint" title="Start your journey now!">select your preffered language from the side menu</div>
+    </div>
+    <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
+
+    <div class='typer-main-section'>
+        <div class="box1">
+            <div class="typer-main-section-intro">
+                <h1 id="why-quiz-heading">Why Quiz?</h1>
+                <p id="why-quiz-paragraph">
+                    Quizzes serve as an effective assessment tool that 
+                    can help to reinforce learning and motivate learners to engage with the material.
+                </p>
+            </div>
+        </div>
+
+        <div class="box2">
+            <div class="typer-section">
+                <p class="typer-paragraph" id="typer-paragraph" name="typer-paragraph"></p>
+                <div align="center">
+                    <a id="typer-topic-link-id" href="php-quiz-1">
+                        <button id="typer-btn" onclick="stopTyper()">Answer >></button>
+                    </a>
+                </div>
+            </div>-
+        </div>
+    </div>
+
+
+    <div class="imagebox_whyus">
+
+        <span class="main_box_title">Start Your Journey Now</span>
+        <!-- Course Cards -->
+
+        {% include 'course_card.html' %}
+
+        <span id="initiatFeedbackEmailBox" hidden>{{ initiatFeedbackEmailBox }}</span>
+
+    </div>
+
+    <!-- Qgen Section (Home Page) -->
+    <div class="qgen-div">
+        <div class="qgen-div-cover">
+            <p id="qgen-quote1">
+                Q-gen is a quiz generator that allows users customize their quizzes, with 
+                Q-gen you can generate your own custom quiz by spicifying the amount of 
+                questions you want and the difficult level of the quiz.
+                <br><a href="qgen"><button class="qgen-btn">Get Started</button></a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer Form -->
+    <div class="feedback-sec">
+        <form id="footer-form" action="feedback" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 id="feedback-heading">Feedback</h1>
+            <div id="feedback-input-container">
+                <input id="feedback_email_input" type="email" name="feedback_email" id="" placeholder="email address" title="enter email address" required>
+                <button id="feedback-btn" type="submit" title="submit email to write feedback">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

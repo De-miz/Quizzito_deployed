@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: rgb(221, 0, 0);
+            color: aliceblue;
+            word-wrap: break-word;
+        }
+        .y {
+            font-size: 5em;
+        }
+        #loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
+            z-index: 900;
+            
+        }
+        #loader {
+            height: 60px;
+            animation: loader 2s linear infinite;
+        }
+        #loader-canceler {
+            position: absolute;
+            /* display: none; */
+            top: 0;
+            right: 0;
+            height: 50px;
+            opacity: 0;
+            transform: translateY(100%);
+            cursor: pointer;
+        }
+        @keyframes loader {
+            0% {transform: scale(1);}
+            50% {transform: scale(1.5);}
+        }
+    </style>
+</head>
+<body>
+    <div class="y">
+        uhkjnlknlknlknlknlknlknlknlknlk
+    nnkllnlknlknlknkjnjknfksdjnskjfnlkfjslfkjslfkjslfjs
+    fsflksflsjflskjflkdjksjlksjflsjflkjsf
+    sfklsdlfkjsldfkjsldjflsjflsjdlfksjlkfjs
+    sfklsjdflksjflksjflksjfjkljkljkjkhkhkj
+    sfsklfjslfkjslfkjslkfjslkfjlsjjkljkljkjkhkhkj
+    </div>
+    <div id="loader-container">
+        <img id="loader-canceler" src="quizzito_logo.png" alt="hi">
+        <img id="loader" src="quizzito_logo.png" alt="hi">
+    </div>
+    <script>
+        setTimeout(() => {
+            fadeIn('loader-canceler')
+        }, 2000);
+
+        function fadeIn(elemID, direction='top') {
+            let elem = document.getElementById(elemID), 
+            opc = 0, slideScale = (direction == 'top') | (direction == 'left') ? -100: 100, 
+            increase = slideScale < 0 ? 1: -1;
+            elem.style.display = 'block';
+            intervalID = setInterval(show, 10);
+            function show() {
+                if (opc >= 1) {
+                    clearInterval(intervalID);
+                } else {
+                    opc += 0.01;
+                    slideScale += increase;
+                    elem.style.opacity = opc;
+                    elem.style.transform = increase > 0 ? `translateY(${slideScale}%)`: `translateX(${slideScale}%)`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

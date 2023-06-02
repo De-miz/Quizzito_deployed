@@ -1,0 +1,111 @@
+<!-- messed with by Demiz -->
+
+{% extends 'master_template.html' %}
+{% load static %}
+{% load demiztags %}
+
+<!-- META TAGS -->
+{% block DESCRIPTION %}You might need a pain killer after this quiz, quizes 
+at Quizzito is no joke, think you can handle it? Good luck!!!{% endblock %}
+
+{% block KEYWORDS %}Quizzito, Quiz, Python quiz, Java quiz, C quiz, HTML quiz, 
+CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, 
+Qgen, Quiz generator, Demiz{% endblock %}
+
+{% block PAGE_TITLE %}Quizzito: {{ course_url_like|title }}{% endblock %}
+<!-- META TAGS ends here -->
+
+
+<span hidden>
+    {% block body_attr %}id="body" onresize="screensizeDetector()" 
+    onload="timing(stopWatch); executeOnTrigger(quizSubmit, for_quizSubmit);"{% endblock %}
+</span> 
+
+{% block CONTENT %}
+    <h1 id='quiz-header'>{{ course|title }}</h1>
+    
+    <form class="questions-form" method="post" enctype="multipart/form-data" action='score/{{course_url_like}}'>
+        {% csrf_token %}
+
+            
+        <time id='timer' name="timer">{{timer_py}}</time>
+        <div hidden>
+            <input id="timer_py" name="timer_py" type="text" value="">
+            <input type="text" name="qgen_amount_of_questions" value="{{amount_of_questions}}">
+            <input type="text" id="qgen_notice" name="qgen_notice" value="{{qgen_notice}}">
+            <input type="text" id="qgen_difficulty" name="qgen_difficulty" value="{{difficulty}}">
+            <input type="text" id="qgen_header" name="qgen_header" value="{{course}}">
+        </div>
+    
+
+        <ol>  
+        {% for count, q, opt1, opt2, opt3, opt4, ans in questions %}
+            {% with optAColor=selected_ans|indexLoop:forloop.counter0|options:opt1|colorOptions:ans optBColor=selected_ans|indexLoop:forloop.counter0|options:opt2|colorOptions:ans optCColor=selected_ans|indexLoop:forloop.counter0|options:opt3|colorOptions:ans optDColor=selected_ans|indexLoop:forloop.counter0|options:opt4|colorOptions:ans selected_opt=selected_ans|get_by_index:forloop.counter0 %}
+                <div class="question-tiles">
+                    <h1 id ="question{{ count|add:1 }}_ans" style = "display:none;" value="{{ans}}">{{ans}}</h1>
+                    <li><pre>{{ q }}</pre></li><br>
+
+
+                    <input 
+                    class="question-option" type="radio" 
+                    name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionA" 
+                    value="{{ opt1 }}" {% if selected_ans|checkQuizSubmit and opt1 == selected_opt %} checked {% endif %}>
+                    <label 
+                    class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionA" 
+                    style="color:{{optAColor}};"><span class="option-value">{{ opt1 }}</span></label><br>
+                        
+
+                    <input 
+                    class="question-option" type="radio" 
+                    name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionB" 
+                    value="{{ opt2 }}" {% if selected_ans|checkQuizSubmit and opt2 == selected_opt %} checked {% endif %}>
+                    <label 
+                    class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionB" 
+                    style="color:{{optBColor}};"><span class="option-value">{{ opt2 }}</span></label><br>
+
+
+                    <input 
+                    class="question-option" type="radio" 
+                    name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionC" 
+                    value="{{ opt3 }}" {% if selected_ans|checkQuizSubmit and opt3 == selected_opt %} checked {% endif %}>
+                    <label 
+                    class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionC" 
+                    style="color:{{optCColor}};"><span class="option-value">{{ opt3 }}</span></label><br>
+
+
+                    <input 
+                    class="question-option" type="radio" 
+                    name="question{{ count|add:1 }}_ans" id="question{{ count|add:1 }}_optionD" 
+                    value="{{ opt4 }}" {% if selected_ans|checkQuizSubmit and opt4 == selected_opt %} checked {% endif %}>
+                    <label 
+                    class="options" name="label{{ count|add:1 }}_ans" for="question{{ count|add:1 }}_optionD" 
+                    style="color:{{optDColor}};"><span class="option-value">{{ opt4}}</span></label><br>
+
+                </div>
+            {% endwith %}
+        {% endfor %}
+        </ol>
+        <div align="center" id="submit-btn-container">
+            <button id ="submit-btn" type="submit" onclick="status='off';" title="End Quiz">Finish Quiz</button>
+        </div>
+    </form>
+    <div id = "results"></div>
+
+    <div align="center" id="after-quiz-btns">
+        <a href="../"><button class="style1-btn home-btn" title="Go back to home page">&lt&lt Home</button></a>
+        <a href="#" onclick="tryAgainQuiz();"><button class="style1-btn try-again-btn" title="Attempt this quiz again">Try Again</button></a>
+        <button class="style1-btn result-btn" onclick="$displayManager(quizResult, new fade_args({elemID: quizResult.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">Result &gt&gt</button>
+    </div>
+    <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
+
+    <div hidden>
+        <span id="course_url_like">{{course_url_like}}</span>
+        <span id="course_category">{{course_category}}</span>
+        <span id="difficulty">{{difficulty}}</span>
+        <span id="amount_of_questions">{{amount_of_questions}}</span>
+        <span id="user_score">{{user_score}}</span>
+        <span id="answered_qst_count">{{request.session.answered_qst_count}}</span>
+        <span id="attempted_qst_count">{{request.session.attempted_qst_count}}</span>
+        <span id="quizSubmit">{{quiz_submit}}</span>
+    </div>
+{% endblock %}

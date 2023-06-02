@@ -1,0 +1,72 @@
+<!-- messed with by Demiz -->
+
+{% extends 'master_template.html' %}
+{% load static %}
+<!-- {% load demiztags %} -->
+
+<!-- META TAGS -->
+{% block DESCRIPTION %}Q-gen is a quiz generator that allows users customize their quizzes, with 
+Q-gen you can generate your own custom quiz by spicifying the amount of 
+questions you want and the difficult level of the quiz.{% endblock %}
+
+{% block KEYWORDS %}Quizzito, Quiz, Python quiz, Java quiz, C quiz, HTML quiz, 
+CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, Quiz generator, Demiz{% endblock %}
+
+{% block PAGE_TITLE %}Quizzito: Qgen{% endblock %}
+<!-- META TAGS ends here -->
+
+
+<span hidden>{% block body_attr %}onresize="screensizeDetector();"{% endblock %}</span> 
+
+{% block CONTENT %}
+    <div class="qgen-header">
+        <h1 id="welcome-to-qgen">Welcome to Q-gen</h1>
+        <p>
+            Q-gen is a quiz generator that allows users customize their quizzes, with 
+            Q-gen you can generate your own custom quiz by spicifying the amount of 
+            questions you want and the difficult level of the quiz.
+        </p>
+    </div>
+    <div class="qgen-form">
+        <form method="post" enctype="multipart/form-data" action="qgen">
+            {% csrf_token %}
+
+            <div class="qgen-category-section">
+                <h3>Select category:</h3>
+
+                {% for i in courses %}
+                    <input id="{{i}}-category" name="category" type="radio" value="{{ i }}" required {% if i == selected_cat %} checked {% endif %}>
+                    <label for="{{i}}-category">{{ i }}</label><br>
+                {% endfor %}
+
+            </div>
+
+            <div class="qgen-difficulty-section">
+                <h3>Select difficulty:</h3>
+
+                {% for level_int, level_str in level %}
+                    <input name="qgen-difficulty" id="{{level_str}}" type="radio" value="{{level_int}}" required {% if level_str == selected_dif %} checked {% endif %}>
+                    <label for="{{level_str}}">{{level_str}}</label><br>
+                {% endfor %}
+
+            </div>
+
+            <div class="qgen-amount-of-questions-section">
+                <h3>Amount of questions:</h3>
+                <input name="qgen-amt" type="number" value="{{ amt_of_questions }}" required min="5"><br>
+                <span class="qgen-error-msg">
+                    {% if amt_error_occured %}
+                        {{qgen_error1}}
+                    {% endif %}
+                </span>
+            </div>
+
+            <div align="center">
+                <button id="qgen-btn" type="submit">Generate Quiz</button>
+            </div>
+
+        </form>
+    </div>
+
+    <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
+{% endblock %}

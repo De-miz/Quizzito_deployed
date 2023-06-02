@@ -1,0 +1,410 @@
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: 1px;
+}
+body {
+    background-color: #ddeffd;
+    /* background-color: #d4d4d4; upcoming update*/
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Loader */
+#loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    z-index: 900;
+    
+}
+#loader-canceler {
+    position: absolute;
+    display: none;
+    top: 10px;
+    right: 10px;
+    height: 50px;
+    opacity: 0;
+    transform: translateY(-100%);
+    cursor: pointer;
+}
+#loader {
+    height: 60px;
+    animation: loader 2s linear infinite;
+}
+@keyframes loader {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.5);}
+}
+
+/* MAIN CONTENT */
+main {
+    margin-top: 100px;
+    padding: 0 10px;
+}
+.welcome-remark {
+    margin: auto;
+    padding: 40px 0;
+    text-align: center;
+    max-width: 1100px;
+    min-width: 200px;
+}
+.welcome-remark h1 {
+    font-weight: bolder;
+    font-size: 3em;
+    color: #0080ff;
+}
+.welcome-remark p {
+    font-family: Poppins;
+    font-size: 2em;
+    font-weight: bolder;
+    line-height: 48px;
+    letter-spacing: 5px;
+}
+#hint {
+    margin: auto;
+    padding: 12px 0;
+    max-width: 750px;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+    border-radius: 4px;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    color: white;
+    background: #0080ff;
+    cursor: pointer;
+}
+#to-top {
+	position:fixed;
+	bottom:-70px;
+    opacity: 0;
+	right:10px;
+	border:none;
+	outline:none;
+	background-color:rgba(255, 0, 0, 0.658);
+	color:white;
+	cursor:pointer;
+	padding:15px;
+	border-radius:10px;
+    font-family: Arial, Helvetica, sans-serif;
+	font-size:16px;
+    transition: 0.5s all linear;
+    z-index: 10;
+}
+#to-top:hover {
+	cursor: default;
+    background-color: red;
+}
+
+/* Navigation Bar */
+nav img {
+    height: 50px;
+}
+.new-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 55px;
+    background-color: white;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-bottom: 1px solid #bbbbbb2f;
+    transition: 0.5s all linear;
+    z-index: 20;
+}
+.q-logo-box {
+    float: left;
+    padding: 0 7px;
+}
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: none;
+    float: right;
+    height: 45px;
+    width: 50px;
+    background-color: #0080ff;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.mobile-menu {
+    height: 100%;
+    width: 100%;
+}
+.non-mobile-nav {
+    margin-right: 70px;
+    text-align: right;
+    height: 100%;
+    overflow: hidden;
+}
+.non-mobile-nav a, 
+.non-mobile-nav span {
+    display: inline-block;
+    padding: 15px 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #0080ff;
+    font-size: 1.1em;
+}
+.nav-links {
+    cursor: pointer;
+    transition: 0.2s all linear;
+}
+.nav-links:hover {
+    transform: scale(1.1) translateY(-10%);
+    color: #0065ca;
+}
+
+/* Why Quiz and Qgen section */
+.typer-section, 
+.typer-main-section-intro {
+    padding: 20px 35px;
+    max-width: 600px;
+    border-radius: 20px;
+    background-color: white;
+}
+#typer-btn {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 20px 50px;
+    font-family: Comfortaa;
+    font-size: 1.1em;
+    background-color: #0080ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    transition: 0.1s all linear;
+}
+#typer-btn:hover {
+    cursor: pointer;
+    background-color: #2d96ff;
+}
+#typer-btn:active {
+    transform: scale(0.9);
+}
+.typer-paragraph {
+    word-break: break-word;
+    text-align: left;
+    padding: 20px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    background-color: rgba(143, 143, 143, 0.11);
+    box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.11);
+}
+.qgen-div, 
+.typer-main-section {
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.qgen-div {
+    background-color: #003964;
+    background-image: url('img/qgen.png');
+}
+.typer-main-section {
+    display: block;
+    text-align: center;
+    margin-bottom: 200px;
+    padding: 100px 20px;
+    background-color: #254e8c;
+    background-image: url('img/why_quiz.jpg');
+    overflow: visible;
+}
+.qgen-div-cover {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.39);
+    transition: 0.3s all linear;
+    overflow: auto;
+}
+.qgen-div-cover:hover {
+    background-color: rgba(0, 0, 0, 0.692);
+}
+.qgen-div-cover p {
+    color: white;
+    font-size: 1.7em;
+    max-width: 600px;
+    padding: 40px;
+}
+.typer-main-section-intro {
+    text-align: left;
+    font-family: Raleway;
+    font-weight: lighter;
+    background: none;
+    color: white;
+}
+#why-quiz-heading {
+    font-size: 4em;
+}
+#why-quiz-paragraph {
+    font-size: 2em;
+}
+.qgen-btn {
+    margin-top: 40px;
+    padding: 20px 60px;
+    background-color: transparent;
+    color: white;
+    font-size: 19px;
+    border: 1px solid white;
+    border-radius: 15px;
+    transition: 0.2s all linear;
+    cursor: pointer;
+}
+.qgen-btn:hover {
+    background-color: #0080ff;
+    border: 1px solid #0080ff;
+}
+.typer-main-section .box1, 
+.typer-main-section .box2 {
+    margin-bottom: 10px;
+    min-width: 230px;
+    max-width: 100%;
+    height: fit-content;
+}
+.box1 {
+    margin-top: -100px;
+}
+.box2 {
+    position: relative;
+    margin: 0 auto;
+}
+.typer-section {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: right;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.26);
+}
+
+/* Course Cards */
+.imagebox_whyus{
+    width: 100%;
+    padding: 100px 0;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+.imagebox_whyus .main_box_title{
+    display: block;
+    font-size: 3em;
+    margin: 30px 0;
+}
+.imagebox_whyus .tile{
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    height: 310px;
+    width: 500px;
+    max-width: 85%;
+    margin: 20px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+.imagebox_whyus .tile_content{
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 200%;
+    transition: 0.4s all ease-out;
+}
+.imagebox_whyus .tile_cover{
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 50%;
+    background-position: center;
+}
+.imagebox_whyus .hidden_content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: 5%;
+    transition: 0.2s all linear;
+}
+.hidden_content .hc_title{
+    display: block;
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 2.5em;
+    margin-top: 200px;
+    margin-left: 10px;
+}
+.hidden_content .hc_text{
+    display: block;
+    margin-top: 60px;
+    font-size: 1.2em;
+}
+.tile-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 175px;
+    border: none;
+    border-radius: 4px;
+    padding: 15px 35px;
+    font-size: 1em;
+    color: white;
+    background-color: #0080ff;
+    transition: 0.1s all linear;
+    z-index: 100;
+}
+.tile-btn:hover {
+    background-color: #2d96ff;
+}
+.tile-btn:active {
+    transform: scale(0.9);
+}
+
+/* For About Page */
+.about-remark{
+    padding-left: 20px;
+}
+.about-page-headings {
+    font-family: Raleway;
+    font-weight: lighter;
+    font-size: 2.5em;
+    color: #0080ff;
+}
+.about-page-parags {
+    text-align: left;
+    font-family: Poppins;
+    font-size: 2em;
+    font-weight: 600;
+}
+.myself {
+    max-width: 700px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.123);
+}
+#myself-header {
+    font-family: Raleway, Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    padding-top: 50px;
+}
+.myself img {
+    width: 250px;
+    float: left;
+    margin: 10px;
+    border-radius: 5px;
+}
+.myself-para {
+    font-family: Quicksand;
+    font-size: 1.4em;
+    padding: 10px;
+}

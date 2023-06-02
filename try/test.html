@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/quizzitoapp/static/quiz.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: gray;
+            margin: 0;
+        }
+        #feedback-input-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+            margin: auto;
+            max-width: 800px;
+            min-width: 200px;
+            height: max-content;
+        }
+    </style>
+</head>
+<body>
+    <div class="feedback-sec">
+        <form id="footer-form" action="" method="post" enctype="multipart/form-data">
+            <h1>Feedback</h1>
+            <div id="feedback-input-container">
+                <input type="email" name="feedback_email" id="" placeholder="email address" required>
+                <button type="submit">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
