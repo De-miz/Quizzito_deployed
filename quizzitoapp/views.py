@@ -8,6 +8,7 @@ from .models import Feedback
 from random import shuffle
 from .vars_funcs import *
 
+
 # Create your views here.
 
 def index(request):
