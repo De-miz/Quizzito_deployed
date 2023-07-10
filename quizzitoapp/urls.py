@@ -8,7 +8,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('', index, name='home'), 
-    # path('admin/', admin.site.urls), HIDEN FOR PRODUCTION
+    path('admin/', admin.site.urls), # HIDEN FOR PRODUCTION
     path('feedback', feedback, name='feedback'), 
     path('about', about, name='about'),
     path('qgen', quiz_generator, name='qgen'),
