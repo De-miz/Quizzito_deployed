@@ -43,6 +43,148 @@ body {
     50% {transform: scale(1.5);}
 }
 
+/* HEADER */
+/* header {
+    background-image: url('img/quizzito_header.png');
+    background-size: 100% 100%;
+    background-color: rgb(255, 255, 255);
+    height: 600px;
+}
+.header-title {
+    position: relative;
+    width: max-content;
+    padding: 10px;
+    padding-top: 100px;
+}
+#header-letter-q {
+    color: #0080ff;
+    font-weight: bolder;
+    font-size: 8em;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.699);
+}
+.welcome-to {
+    position: absolute;
+    top: 120px;
+    right: 0;
+    color: rgb(153, 0, 255);
+    font-size: 1.5em;
+    padding-right: 10px;
+}
+#remaining-letters {
+    color: #0080ff;
+    font-size: 5em;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.342);
+}
+#welcome-statement {
+    position: relative;
+    height: max-content;
+    margin: 20px;
+    margin-top: 200px;
+    max-width: 500px;
+    min-width: 100px;
+    background-color: rgba(255, 255, 255, 0.815);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    float: right;
+    border-radius: 30px;
+    padding: 50px;
+    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.288);
+    z-index: 900;
+}
+#welcome-statement p {
+    font-size: 1.5em;
+}
+#welcome-statement a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #0080ff;
+    background-image: linear-gradient(150deg, #ff00ff, #b71dff);
+    border-radius: 10px;
+    padding: 20px 0;
+    min-width: 100px;
+    max-width: 200px;
+    transition: 0.3s all linear;
+}
+#welcome-statement a:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.404);
+}
+#wave-container {
+    position: absolute;
+    top: 600px;
+    height: 495px;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+#wave {
+    display: flex;
+    height: 295px;
+    width: 500%;
+    transition: 1s all linear;
+}
+#wave1, 
+#wave2 {
+    height: 490px;
+    width: 5000px;
+    transition: 1s all linear;
+}
+#wave1 {
+    animation: wave1 50s infinite linear;
+    animation-delay: 25s;
+    transform: translateX(0%);
+}
+#wave2 {
+    animation: wave2 50s infinite linear;
+}
+
+@keyframes wave1 {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+@keyframes wave2 {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    header {
+        background-size: cover;
+    }
+}
+@media screen and (max-width: 400px) {
+    #welcome-statement {
+        padding: 40px;
+    }
+    #welcome-statement p {
+        font-size: 1.2em;
+    }
+    #remaining-letters {
+        font-size: 4em;
+    }
+    .welcome-to {
+        font-size: 1.2em;
+    }
+}
+@media screen and (max-width: 340px) {
+    #welcome-statement p {
+        font-size: 1em;
+    }
+    #remaining-letters {
+        font-size: 3em;
+    }
+} */
+
 /* MAIN CONTENT */
 main {
     margin-top: 100px;
@@ -56,9 +198,13 @@ main {
     min-width: 200px;
 }
 .welcome-remark h1 {
+    margin: auto;
+    padding: 30px 50px;
+    border-radius: 10px;
     font-weight: bolder;
     font-size: 3em;
-    color: #0080ff;
+    color: #ddeffd;
+    background-image: linear-gradient(150deg, #af00ff, #0080ff);
 }
 .welcome-remark p {
     font-family: Poppins;
@@ -77,7 +223,7 @@ main {
     font-size: 1.2em;
     letter-spacing: 2px;
     color: white;
-    background: #0080ff;
+    background: #5542ff;
     cursor: pointer;
 }
 #to-top {
@@ -395,7 +541,7 @@ nav img {
 #myself-header {
     font-family: Raleway, Arial, Helvetica, sans-serif;
     font-size: 2em;
-    padding-top: 50px;
+    padding: 10px;
 }
 .myself img {
     width: 250px;

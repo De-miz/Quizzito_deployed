@@ -2,87 +2,179 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
         body {
-            background-color: rgb(221, 0, 0);
-            color: aliceblue;
-            word-wrap: break-word;
+            background-color: rgb(255, 255, 255);
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            height: 2000px;
         }
-        .y {
-            font-size: 5em;
+        header {
+            background-image: url('quizzito_header.png');
+            background-size: 100% 100%;
+            background-color: rgb(255, 255, 255);
+            height: 600px;
         }
-        #loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0);
-            backdrop-filter: blur(7px);
-            -webkit-backdrop-filter: blur(7px);
-            z-index: 900;
-            
+        .header-title {
+            position: relative;
+            width: max-content;
+            padding: 10px;
+            padding-top: 100px;
         }
-        #loader {
-            height: 60px;
-            animation: loader 2s linear infinite;
+        #header-letter-q {
+            color: #0080ff;
+            font-weight: bolder;
+            font-size: 8em;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.699);
         }
-        #loader-canceler {
+        .welcome-to {
             position: absolute;
-            /* display: none; */
-            top: 0;
+            top: 120px;
             right: 0;
-            height: 50px;
-            opacity: 0;
-            transform: translateY(100%);
-            cursor: pointer;
+            color: rgb(153, 0, 255);
+            font-size: 1.5em;
+            padding-right: 10px;
         }
-        @keyframes loader {
-            0% {transform: scale(1);}
-            50% {transform: scale(1.5);}
+        #remaining-letters {
+            color: #0080ff;
+            font-size: 5em;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.342);
+        }
+        #welcome-statement {
+            position: relative;
+            height: max-content;
+            margin: 20px;
+            margin-top: 200px;
+            max-width: 500px;
+            min-width: 100px;
+            background-color: rgba(255, 255, 255, 0.815);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            float: right;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.288);
+            z-index: 900;
+        }
+        #welcome-statement p {
+            font-size: 1.5em;
+        }
+        #welcome-statement a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #0080ff;
+            background-image: linear-gradient(150deg, #ff00ff, #b71dff);
+            border-radius: 10px;
+            padding: 20px 0;
+            min-width: 100px;
+            max-width: 200px;
+            transition: 0.3s all linear;
+        }
+        #welcome-statement a:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 50px 0px rgba(0, 0, 0, 0.404);
+        }
+        #wave-container {
+            position: absolute;
+            top: 600px;
+            height: 495px;
+            width: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        #wave {
+            display: flex;
+            height: 295px;
+            width: 500%;
+            transition: 1s all linear;
+        }
+        #wave1, 
+        #wave2 {
+            height: 490px;
+            width: 5000px;
+            transition: 1s all linear;
+        }
+        #wave1 {
+            animation: wave1 50s infinite linear;
+            animation-delay: 25s;
+            transform: translateX(0%);
+        }
+        #wave2 {
+            animation: wave2 50s infinite linear;
+        }
+
+        @keyframes wave1 {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        @keyframes wave2 {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-200%);
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            header {
+                background-size: cover;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            #welcome-statement {
+                padding: 40px;
+            }
+            #welcome-statement p {
+                font-size: 1.2em;
+            }
+            #remaining-letters {
+                font-size: 4em;
+            }
+            .welcome-to {
+                font-size: 1.2em;
+            }
+        }
+        @media screen and (max-width: 340px) {
+            #welcome-statement p {
+                font-size: 1em;
+            }
+            #remaining-letters {
+                font-size: 3em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="y">
-        uhkjnlknlknlknlknlknlknlknlknlk
-    nnkllnlknlknlknkjnjknfksdjnskjfnlkfjslfkjslfkjslfjs
-    fsflksflsjflskjflkdjksjlksjflsjflkjsf
-    sfklsdlfkjsldfkjsldjflsjflsjdlfksjlkfjs
-    sfklsjdflksjflksjflksjfjkljkljkjkhkhkj
-    sfsklfjslfkjslfkjslkfjslkfjlsjjkljkljkjkhkhkj
-    </div>
-    <div id="loader-container">
-        <img id="loader-canceler" src="quizzito_logo.png" alt="hi">
-        <img id="loader" src="quizzito_logo.png" alt="hi">
-    </div>
-    <script>
-        setTimeout(() => {
-            fadeIn('loader-canceler')
-        }, 2000);
-
-        function fadeIn(elemID, direction='top') {
-            let elem = document.getElementById(elemID), 
-            opc = 0, slideScale = (direction == 'top') | (direction == 'left') ? -100: 100, 
-            increase = slideScale < 0 ? 1: -1;
-            elem.style.display = 'block';
-            intervalID = setInterval(show, 10);
-            function show() {
-                if (opc >= 1) {
-                    clearInterval(intervalID);
-                } else {
-                    opc += 0.01;
-                    slideScale += increase;
-                    elem.style.opacity = opc;
-                    elem.style.transform = increase > 0 ? `translateY(${slideScale}%)`: `translateX(${slideScale}%)`;
-                }
-            }
-        }
-    </script>
+    <header>
+        <div class="header-title">
+            <div class="welcome-to">Welcome To</div>
+            <span id="header-letter-q">Q</span><span id="remaining-letters">uizzito</span>
+        </div>
+        <div id="welcome-statement">
+            <p>
+                What's the point of learning if you can't test. Quizzito offers
+                over 5000+ programming quiz questions. Get your brain activated, 
+                Get it online, Get it ready for some critical thinking
+            </p>
+            <div align="right" style="padding: 30px;">
+                <a href="#">Let's Begin >></a>
+            </div>
+        </div>
+        <div id="wave-container">
+            <div id="wave">
+                <img id='wave1' src="wave.png" alt="Wave effect">
+                <img id='wave2' src="wave.png" alt="Wave effect">
+            </div>
+        </div>
+    </header>
 </body>
 </html>

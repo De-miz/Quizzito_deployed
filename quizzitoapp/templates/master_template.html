@@ -38,6 +38,10 @@
     {% include 'pop_ups.html' %}
     {% include 'sidemenu.html' %}
 
+    {% block HEADER %} 
+    <!-- Page header comes here -->
+
+    {% endblock %}
     <main id="main" {% block main_attr %}{% endblock %}>
         {% block CONTENT %}
         <!-- Page content comes here -->
