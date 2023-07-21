@@ -9,7 +9,7 @@ from random import shuffle
 from .vars_funcs import *
 
 
-# Create your views here.
+
 
 def index(request):
     homepage = loader.get_template('index.html')
@@ -53,8 +53,10 @@ def quiz(request, course_url_like, amount_of_questions=0, difficulty=None, quiz_
 
     This function renders page for quizzes...
     '''
+    if 'csharp' in course_url_like:
+        course_url_like = course_url_like.replace('csharp', 'c#')
 
-    courses = [i[0] for i in set(Q1.objects.values_list('course'))]
+    courses =  AVAILABLE_QUIZZES #[i[0] for i in set(Q1.objects.values_list('course'))]
     ql_validator = quiz_link_validator(course_url_like)
 
     selected_course = course_url_like.split('-')

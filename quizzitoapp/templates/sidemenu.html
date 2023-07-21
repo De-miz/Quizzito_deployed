@@ -6,7 +6,7 @@
 <div class="Side-menu" id="Side-menu" >
     <h1 id="side-menu-main-header">Courses</h1>
 
-    {% with course_list="Python,HTML,JavaScript,C++,Java,C,PHP,CSS"|make_a_list %} 
+    {% with course_list="Python,HTML,JavaScript,C++,Java,C,PHP,CSS,CSharp"|make_a_list %} 
         {% for i in course_list %} 
             <div class="sub-menu" onclick="showDropDown(this)">
                 <span class="side-menu-headers">{{ i }}</span>

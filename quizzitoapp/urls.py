@@ -3,10 +3,18 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import *
 
+
+
+sitemaps = {
+    'static': QuizzitoMainSitemap,
+}
 
 
 urlpatterns = [
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name= 'django.contrib.sitemaps.views.sitemap'),
     path('', index, name='home'), 
     path('admin/', admin.site.urls), # HIDEN FOR PRODUCTION
     path('feedback', feedback, name='feedback'), 

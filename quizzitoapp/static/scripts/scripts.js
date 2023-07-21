@@ -112,7 +112,6 @@ function screensizeDetector() {
 
 
 function handleScroll(enable_scroll=true) {
-    console.log('scroll', document.body.style.overflow)
     if (enable_scroll) {
         document.body.style.overflow = '';
     } else {
@@ -303,7 +302,6 @@ function resetMenuForMobile() {
          * MAKE SURE OF NECESSARY ARGUMENTS
          * exp. fade_arguments = new fade_args({elemID: id, direction: 'middle', scale: 0.5, speed: 1, steps: 70})
          */
-        console.log('over here..')
         let display = element.style.display;
         if (Object.keys(fade_arguments).length) {
         let animate = (display == 'none' || display == '') ? (function(){fadeIn(fade_arguments); handleScroll(false);}): (function(){fadeOut(fade_arguments); handleScroll();});
@@ -329,7 +327,6 @@ function resetMenuForMobile() {
          * if fade_arguments is not null, then it must be an anonymous function
          * with argument elementID eg. (function(elementID){})
          */
-        console.log('oops')
         if (Object.keys(fade_arguments).length) {
             fadeOut(fade_arguments);
         } else {

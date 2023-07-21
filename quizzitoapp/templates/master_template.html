@@ -12,7 +12,17 @@
     <meta name="revised detail" content="last updated time">
     <meta name="author" content="Koders, Emmanuel Eddie Joshua Kweh, Demiz">
     <meta name="keywords" content="{% block KEYWORDS %}{% endblock %}">
-    <meta name="description" content="{% block DESCRIPTION %}{% endblock %}">
+    <meta name="description" property="og:description" content="{% block DESCRIPTION %}{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <meta name="og:type" content="website">
+    <meta name="application-name" content="Quizzito">
+    <meta property="og:url" content="https://quizzito.pythonanywhere.com/{% block og_url %}{% endblock %}"/>
+    <meta property="og:image" content="https://quizzito.pythonanywhere.com/{% block og_img %}{% endblock %}" />
+    <meta property="og:image:alt" content="{% block og_img_alt %}{% endblock %}" />
+    <meta name="twitter:image" content="https://quizzito.pythonanywhere.com/{% block tt_img %}{% endblock %}" />
+    <meta property="twitter:image:alt" content="{% block tt_img_alt %}{% endblock %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@demizbehave" />
     <link rel='icon' href="{% static 'logos/quizzito_logo.png' %}" type="image/x-icons">
     <link rel="stylesheet" href="{% static 'font.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'index.css' %}" type="text/css">
