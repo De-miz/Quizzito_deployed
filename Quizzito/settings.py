@@ -32,7 +32,10 @@ ALLOWED_HOSTS = ['quizzito.pythonanywhere.com'] # For production or major tests
 
 # Application definition
 
+# sitemap ID
 SITE_ID = 1
+
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'quizzitoapp.apps.QuizzitoappConfig'
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,10 +59,42 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    # 'csp.middleware.CSPMiddleware',
 ]
 
+
+
+# Content Security Policy (incoming updates)
+CSP_HEADER = {
+    'default-src': "'self'", # "'unsafe-inline'" will be added in future update (NO INLINE STYLES&SCRIPTS)
+    'script-src': "'self'",
+    'style-src': "'self'",
+    'img-src': "'self' data:",
+    'font-src': "'self'",
+    'connect-src': "'self'",
+    'media-src': "'self'",
+    'object-src': "'none'",
+    'frame-src': "'none'" # iframes will be allowed in future updates
+}
+
+CSP_MIDDLEWARE = {
+    'default-src': CSP_HEADER['default-src'],
+    'script-src': CSP_HEADER['script-src'],
+    'style-src': CSP_HEADER['style-src'],
+    'img-src': CSP_HEADER['img-src'],
+    'font-src': CSP_HEADER['font-src'],
+    'connect-src': CSP_HEADER['connect-src'],
+    'media-src': CSP_HEADER['media-src'],
+    'object-src': CSP_HEADER['object-src'],
+    'frame-src': CSP_HEADER['frame-src'],
+}
+
+
+
 ROOT_URLCONF = 'quizzitoapp.urls'
+
+
 
 TEMPLATES = [
     {
@@ -75,7 +112,10 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'Quizzito.wsgi.application'
+
 
 
 # Database

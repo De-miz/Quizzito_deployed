@@ -34,8 +34,10 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
         $addNewCourse('C', 'C is one of the prefered languages for Data Analytics, is this true?', 'c.jpg');
         $addNewCourse('C++', 'Do you know C++ is not the best language for gaming? what\'d you think...', 'c++_background.png');
         $addNewCourse('Java', 'Is it true Java is one of the prefered languages for web development?', 'java.png');
-        $addNewCourse('C#', 'C# is one of the best when it comes to data analytics, True or False?', 'csharp.png');
-        $addNewCourse('PHP', 'PHP is a server-side scripting language designed for web development.', 'php.jpg');"
+        $addNewCourse('CSharp', 'C# is one of the best when it comes to data analytics, True or False?', 'csharp.png');
+        $addNewCourse('PHP', 'PHP is a server-side scripting language designed for web development.', 'php.jpg');
+        $addNewCourse('SQL', 'A language for storing and processing information in a relational database.', 'SQL.jpg');
+        "
     {% endblock %}
 </span> 
 
@@ -130,6 +132,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
                 <input id="feedback_email_input" type="email" name="feedback_email" id="" placeholder="email address" title="enter email address" required>
                 <button id="feedback-btn" type="submit" title="submit email to write feedback">SUBMIT</button>
             </div>
+            <div class="distription-type-a">Your thoughts are important to us</div>
         </form>
     </div>
 {% endblock %}

@@ -228,6 +228,11 @@ footer {
     min-width: 200px;
     height: max-content;
 }
+.distription-type-a {
+    text-align: center;
+    padding: 10px;
+    color: #ffc3cd;
+}
 :focus {
     outline: none;
 }
