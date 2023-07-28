@@ -1,5 +1,6 @@
 from django.db import models
 from .validations import *
+from django.utils import timezone
 
 
 # Questions in the Database should not be frequently deleted!!!
@@ -30,6 +31,10 @@ class Questions_Database1(models.Model):
             ('3', 'hard')
         )
     )
+
+    # date_added field was added after about 1000+ questions have been
+    # added to the this table !!!
+    date_added = models.DateField(default=timezone.now) 
     
     def __str__(self) -> str:
         return f'{self.question}  [{self.course.capitalize()}] [{self.id}]'

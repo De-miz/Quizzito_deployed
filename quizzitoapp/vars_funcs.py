@@ -1,5 +1,6 @@
 from yagmail import SMTP
 from re import search
+from .models import Questions_Database1 as Q1
 
 
 # VARIABLES
@@ -7,6 +8,8 @@ from re import search
 SERVER_EMAIL = 'koders.notify.gh@gmail.com'
 SERVER_EMAIL_PASSWORD = 'qgpnhvwjixhcuujg' # DO NOT COPY
 ADMIN_NOTIFICATION_PASSWORD = '12345'
+AVAILABLE_QUIZZES = [i[0] for i in set(Q1.objects.values_list('course'))]
+COURSE_RE_URL_PATTERN = r'[\w\W]+[#]?-quiz-[1-9]'
 quizDifficulties = {
     '1': 'easy', 
     '2': 'medium', 
@@ -15,7 +18,18 @@ quizDifficulties = {
 
 
 
+
 # FUNCTIONS
+
+def quiz_urls_generator(course):
+    urls = []
+    for i in range(1, 11):
+        urls.append({'url': f'/{course}-quiz-{i}', 'priority': '1.0', 'changefreq': 'daily'})
+    return urls
+
+quiz_urls = [quiz_urls_generator(quiz.lower()) for quiz in AVAILABLE_QUIZZES]
+QUIZ_SITEMAP_ITEMS = [item for urls in quiz_urls for item in urls]
+
 
 def admin_pwd_validator(user_input):
     if user_input == '':
@@ -34,7 +48,7 @@ def emailer(user_email, subject, message):
         )
     
 def quiz_link_validator(url):
-    return True if search(r'[\w\W]+-quiz-[1-9]', url) else False
+    return True if search(COURSE_RE_URL_PATTERN, url) else False
         
         
 def isInDB(lookup_email, db):
