@@ -12,7 +12,7 @@
     <title>404</title>
     <style>
         body {
-            background: url('static/img/404_background.gif') center no-repeat;
+            background: url("{% static 'img/404_background.gif' %}") center no-repeat;
             background-size: cover;
             background-color: rgb(0, 22, 41);
             height: 90vh;
@@ -63,7 +63,7 @@
             <h1>404</h1>
             <p>Oops!!! you took a wrong turn...
             </p>
-            <a href="./"><button>Get Back</button></a>
+            <a href="/"><button>Get Home</button></a>
         </div>
     </main>
 </body>
