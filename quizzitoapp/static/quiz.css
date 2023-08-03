@@ -7,6 +7,7 @@ body {
     height: -webkit-fitcontent;
     height: -moz-fit-content;
     height: fit-content;
+    font-family: Comfortaa, Arial, Helvetica, sans-serif;
     /*display: flex;
     flex-direction: column;*/
 }
@@ -137,6 +138,7 @@ body {
     background-color: #b4daff;
 }
 .Side-menu {
+    font-family: Comfortaa, Arial, Helvetica, sans-serif;
     position: fixed;
     top: 58px;
     height: max-content;
@@ -331,11 +333,11 @@ footer {
     transform: translateY(10%);
 }
 .home-btn {
-    background-color: #0080ff1f;
+    background-color: hsl(210, 100%, 90%);
     color: #0080ff;
 }
 .try-again-btn {
-    background-color: #0080ffc7;
+    background-color: hsl(210, 100%, 68%);
 }
 .try-again-btn:hover {
     background-color: #0080ff98;

@@ -439,7 +439,7 @@ function resetMenuForMobile() {
             quiz_total_questions = Number(document.getElementById('amount_of_questions').innerHTML);
         }
 
-        quiz_time_taken ??= '';
+        quiz_time_taken = (!quiz_time_taken) ? '':quiz_time_taken;
         document.getElementById('time-taken').innerHTML = 'Total time taken: ' + quiz_time_taken.innerHTML;
         document.getElementById('answered').innerHTML = 'Total Answered: ' + questions_answered;
         document.getElementById('incorrects').innerHTML = 'Incorrects: ' + (quiz_total_questions - questions_answered); // includes unattempted questions

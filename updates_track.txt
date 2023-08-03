@@ -1,0 +1,47 @@
+
+# FOLLOW GITHUB ISSUES OF THIS REPO TO FOLLOW UP
+
+
+S1
+# THESE ARE RECENT UPDATES
+
+* SQL questions added to database
+* UI/UX greatly improved
+* Bug fixes
+
+
+
+S2
+# THESE UPDATES ARE YET TO HAPPEN
+
+* updating db from pythonanywhere.com
+* course tiles should be more flexible
+* programming riddles feature added
+* more questions
+* more courses added
+* popup and menu for mobile now flexible (css handles this instead of js)
+* user account now available
+* popup message for unavailable links
+* email validation field
+* improve SEO
+* NO inline styles and scripts
+* Bug fixes
+
+
+
+S3
+# CURRENT CHANGES (these could be changes from S1 and S2, must be deleted before commit S1 will replace it)
+
+* Major bug fixes for older browsers, now compatible for old devices
+* Contributors section added
+* UX improved
+* bug fixes
+
+
+S4
+# FUTURE UPDATES 
+
+* Whatsapp automation with python
+* MTN API implementation or any payment methods
+* blog posts added (after user account is available)
+* comment feature add

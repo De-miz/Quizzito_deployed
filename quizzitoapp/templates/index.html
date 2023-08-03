@@ -26,7 +26,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
 <span hidden>
     <!-- {% block HOME_PAGE_SCRIPT %}<script src="{% static 'scripts/index.js' %}"></script>{% endblock %} -->
     {% block body_attr %}
-        onresize="screensizeDetector();" 
+        onresize="try {screensizeDetector()} catch (error) {console.log('me')}" 
         onload="$addNewCourse('Python', 'Python is not a programming language, True or False?', 'images.jpeg');
         $addNewCourse('HTML', 'Is HTML5 supported by all browsers? let\'s find out', 'html.jpg');
         $addNewCourse('JavaScript', 'Is JavaScript easy to start with or very difficult?', 'javascript-logo-1.png');
