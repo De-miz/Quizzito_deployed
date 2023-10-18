@@ -13,7 +13,7 @@ from .vars_funcs import *
 
 def index(request):
     homepage = loader.get_template('index.html')
-    return HttpResponse(homepage.render({}, request))
+    return HttpResponse(homepage.render({'num_of_courses': len(set(Q1.objects.values_list('course')))}, request))
 
 
 def notifier(request):

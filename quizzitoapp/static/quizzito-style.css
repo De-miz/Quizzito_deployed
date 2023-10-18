@@ -1,3 +1,6 @@
+.qs-unhide {
+    display: block;
+}
 .qs-team-members-container {
     font-family: Quicksand, Arial, Helvetica, sans-serif;
     display: flex;
@@ -54,6 +57,7 @@
     transform: translateY(-200%) translateX(200%);
     transition: 0.5s all linear;
     color: #0080ff;
+    font-size: 1.5em;
 }
 .qs-team-member-icons:hover {
     color: #af00ff;
@@ -111,7 +115,9 @@
     display: block;
     margin-top: 150px;
 }
-
+.qs-pointer {
+    cursor: pointer;
+}
 
 
 /* RESPONSIVENESS */

@@ -3,10 +3,11 @@
 {% load static %}
 {% load demiztags %}
 
-{% for i in 10|loop %} 
+<!-- head to index.html to display background image -->
+{% for i in num_of_courses|loop %} 
   <div class="tile">
     <div class="tile_content" id="tile_content">
-      <span class="tile_cover" id="_cover" style="background-color: {% cycle '#040d0d' '#d1b1ea' '#f6d001' '#2a97cf' '#1a037c' '#11379f' '#9b0107' '#aa2a62' '#505050' '#340d72' %}">
+      <span class="tile_cover" id="_cover" style="background-color: {% cycle '#040d0d' '#d1b1ea' '#f6d001' '#2a97cf' '#1a037c' '#11379f' '#9b0107' '#aa2a62' '#505050' '#340d72' '#33447a' %}">
       </span>
       <span class="hidden_content" id="hiddenContent">
         <span class="hc_title" id="courseID"></span>
