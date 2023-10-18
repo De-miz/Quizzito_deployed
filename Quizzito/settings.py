@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-j(woi(9(aa4is4-5$3kt+^d9#%!5)#-=8z(7i)3g(am&w0(%*='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# ALLOWED_HOSTS = ['*'] # For testing
-ALLOWED_HOSTS = ['quizzito.pythonanywhere.com'] # For production or major tests
+ALLOWED_HOSTS = ['*'] # For testing
+# ALLOWED_HOSTS = ['quizzito.pythonanywhere.com'] # For production or major tests
 
 
 # Application definition
@@ -35,6 +35,15 @@ ALLOWED_HOSTS = ['quizzito.pythonanywhere.com'] # For production or major tests
 # sitemap ID
 SITE_ID = 1
 
+
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 
 INSTALLED_APPS = [
@@ -46,7 +55,12 @@ INSTALLED_APPS = [
     'django.contrib.sites', 
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
-    'quizzitoapp.apps.QuizzitoappConfig'
+    'quizzitoapp.apps.QuizzitoappConfig',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 
@@ -61,8 +75,23 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     # 'csp.middleware.CSPMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
 
 
 # Content Security Policy (incoming updates)
@@ -111,7 +140,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 
 WSGI_APPLICATION = 'Quizzito.wsgi.application'

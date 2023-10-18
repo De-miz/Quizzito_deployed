@@ -3,7 +3,7 @@
 {% load static %}
 
 <!-- Quiz Result -->
-<div class="popup" id="result-background" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">
+<div class="popup" id="result-background" onclick="$displayManager(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">
     <div class="result" id="result-background-main-box">
         <img onclick="$displayManager(quizResult, new fade_args({elemID: quizResult.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
         <h2 name="quiz-level"></h2>
@@ -20,7 +20,7 @@
 </div>
 
 <!-- Quiz Description -->
-<div class="popup" id="quiz-description-background" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">
+<div class="popup" id="quiz-description-background" onclick="$displayManager(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">
     <div class="result" id="quiz-description-background-main-box">
         <img onclick="$displayManager(document.getElementById('quiz-description-background'), new fade_args({elemID: 'quiz-description-background', direction: 'middle', scale: 0.5, speed: 1, steps: 30}))" src="{% static 'icons/cancel_icon.png' %}" alt="cancel-button" align="right" title="Exit">
         <h2 name="quiz-level"></h2>
@@ -32,7 +32,7 @@
 </div>
 
 <!-- Login feature-not-added message -->
-<div class="popup" id="login-popup" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">
+<div class="popup" id="login-popup" onclick="$displayManager(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">
     <div class="result" id="login-popup-main-box">
         <p id='popupMsg' class='popupMsg'></p>
         <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('login-popup'), new fade_args({elemID: 'login-popup', direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">OK</button></div>
@@ -40,7 +40,7 @@
 </div>
 
 <!-- popup message for feedback -->
-<div class="popup" id="feed_popup" onclick="$forceDisappear(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30})); if (initiatFeedbackEmailBox = 'off') {window.location.href = './'}">
+<div class="popup" id="feed_popup" onclick="$displayManager(this, new fade_args({elemID: this.id, direction: 'middle', scale: 0.5, speed: 1, steps: 30})); if (initiatFeedbackEmailBox = 'off') {window.location.href = './'}">
     <div class="result" id="feed-popup-main-box">
         <p id='feed_popupMsg' class='popupMsg'></p>
         <div align="center"><button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('feed_popup'), new fade_args({elemID: 'feed_popup', direction: 'middle', scale: 0.5, speed: 1, steps: 30}))">OK</button></div>
@@ -56,7 +56,7 @@ Admin Password
             <div><input type="password" name="admin_pwd"></div>
             <div align="center">
                 <button type="submit" class="quiz-initializer-btn">confirm</button>
-                <button class="quiz-initializer-btn" onclick="$forceDisappear(document.getElementById('admin-pwd-popup'))">dismiss</button>
+                <button class="quiz-initializer-btn" onclick="$displayManager(document.getElementById('admin-pwd-popup'))">dismiss</button>
             </div>
         </form>
     </div>

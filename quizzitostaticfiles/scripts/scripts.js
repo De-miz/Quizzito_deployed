@@ -2,6 +2,7 @@
 
 var mainTag = document.getElementById('main'),
 sidemenu = document.getElementById("Side-menu"),
+autoHideNav = true,
 
 non_mobile_nav = document.getElementById('non-mobile-nav'), 
 mobile_nav = document.getElementById('mobile-nav'),
@@ -104,7 +105,7 @@ function screensizeDetector() {
         non_mobile_nav.style.display = 'block'
         sidemenu.style.display = 'block';
         non_mobile_nav.style.marginRight = `${screenWidth / 7.1}px`; 
-        resetMenuForMobile();
+        // resetMenuForMobile();
     }
 
     mainTag.style.marginLeft = screenWidth <= 700 || screenHeight <= 480 ? 0: "230px";
@@ -177,7 +178,7 @@ function showDropDown(menu) {
 }
 
 
-function resetMenuForMobile() {
+function resetMenuForMobile() { // function deprecated
     let img_file_path = menuIcon.src;
     img_file_path = img_file_path.split('/');
     img_file_path[img_file_path.length-1] = 'menu_icon.png'
@@ -297,22 +298,40 @@ function resetMenuForMobile() {
     // }
 
 
-    function $displayManager(element, fade_arguments={}) {
+    function $displayManager(element, fade_arguments={}) { // will be deprecated soon
         /**
          * MAKE SURE OF NECESSARY ARGUMENTS
          * exp. fade_arguments = new fade_args({elemID: id, direction: 'middle', scale: 0.5, speed: 1, steps: 70})
          */
         let display = element.style.display;
-        if (Object.keys(fade_arguments).length) {
-        let animate = (display == 'none' || display == '') ? (function(){fadeIn(fade_arguments); handleScroll(false);}): (function(){fadeOut(fade_arguments); handleScroll();});
-            animate();
+        // if (Object.keys(fade_arguments).length) {
+        // let animate = (display == 'none' || display == '') ? (function(){fadeIn(fade_arguments); handleScroll(false);}): (function(){fadeOut(fade_arguments); handleScroll();});
+        //     animate();
+        // } else {
+        //     if (display == 'none' || display == '') {
+        //         element.style.display = 'block';
+        //     } else {
+        //         element.style.display = 'none';
+        //     }
+        // }
+        element.classList.toggle('showpopup');
+        console.log(element.classList);
+
+    }
+
+
+    function menuDrawer (elemID) {
+        let menu = document.getElementById(elemID);
+        // menu.innerText = (menu.innerText=='menu') ? 'close': 'menu';
+        if (menu.innerText=='menu') {
+            menu.innerText = 'close';
+            autoHideNav = false;
         } else {
-            if (display == 'none' || display == '') {
-                element.style.display = 'block';
-            } else {
-                element.style.display = 'none';
-            }
+            menu.innerText = 'menu';
+            autoHideNav = true;
         }
+        document.getElementById('hiddenmenu').classList.toggle('undoer');
+        console.log('working');
     }
 
 
@@ -322,7 +341,7 @@ function resetMenuForMobile() {
     }
 
 
-    function $forceDisappear(element, fade_arguments={}) {
+    function $forceDisappear(element, fade_arguments={}) { // deprecated
         /**
          * if fade_arguments is not null, then it must be an anonymous function
          * with argument elementID eg. (function(elementID){})
@@ -336,7 +355,7 @@ function resetMenuForMobile() {
     }
     
 
-    function elementDisplaySwitcher(elem1, elem2, is_image=false, display_type='block') 
+    function elementDisplaySwitcher(elem1, elem2, is_image=false, display_type='block') // will be deprecated (under review)
     {
         /**
          * This function switches display properties to none between 2 elements 
@@ -521,7 +540,7 @@ function resetMenuForMobile() {
         document.getElementById(course).innerHTML = cap(course);
         document.getElementById(new_description_id).innerHTML = description.length <= 75 ? description : "ERROR!!! LENGTH MUST BE 75 OR BELOW";
         courseCover.style.backgroundImage = `url('static/img/${img}')`;
-        courseCover.style.backgroundSize = "auto 100%";
+        courseCover.style.backgroundSize = "cover";
     }
 }
 {
@@ -548,33 +567,35 @@ function resetMenuForMobile() {
 // Events 
 
 window.onscroll = () => {
-    scrollCoords = document.documentElement.scrollTop;
-    scrollHistory.push(scrollCoords)
-    if (scrollCoords > 5) {
-        navigationBar.style.top = '-60px';
-        navigationBar.style.backgroundColor = 'rgba(255, 255, 255, 0.774)';
-        sidemenu.style.transition = '1s all ease-out';
-        sidemenu.style.top = '0';
-    } else {
-        navigationBar.style.backgroundColor = 'white';
-    }
-    if (scrollHistory.length > 2) {
-        scrollHistory.shift();
-        if (scrollHistory[0] > scrollHistory[1]) {
-            navigationBar.style.top = '0';
-            sidemenu.style.transition = '0.5s all linear';
-            sidemenu.style.top = '58px';
+    if (autoHideNav) {
+        scrollCoords = document.documentElement.scrollTop;
+        scrollHistory.push(scrollCoords)
+        if (scrollCoords > 5) {
+            navigationBar.style.top = '-60px';
+            navigationBar.style.backgroundColor = 'rgba(255, 255, 255, 0.774)';
+            sidemenu.style.transition = '1s all ease-out';
+            sidemenu.style.top = '0';
+        } else {
+            navigationBar.style.backgroundColor = 'white';
         }
-    }
-
-    if (scrollCoords >= 700) {
-        to_top_btn.style.display = "block";
-        to_top_btn.style.bottom = '10px';
-        to_top_btn.style.opacity = '1'
-        
-    } else {
-        to_top_btn.style.bottom = '-70px';
-        to_top_btn.style.opacity = '0'
+        if (scrollHistory.length > 2) {
+            scrollHistory.shift();
+            if (scrollHistory[0] > scrollHistory[1]) {
+                navigationBar.style.top = '0';
+                sidemenu.style.transition = '0.5s all linear';
+                sidemenu.style.top = '58px';
+            }
+        }
+    
+        if (scrollCoords >= 700) {
+            to_top_btn.style.display = "block";
+            to_top_btn.style.bottom = '10px';
+            to_top_btn.style.opacity = '1'
+            
+        } else {
+            to_top_btn.style.bottom = '-70px';
+            to_top_btn.style.opacity = '0'
+        }
     }
 }
 
@@ -648,5 +669,19 @@ for (i=0; i<resultPopupBox.length; i++) {
             });
         })(i);
     }
+    setInterval(()=>{
+        let randomIndex = Math.floor(Math.random() * 100) % courseHiddenBottom.length;
+        // console.log(randomIndex, courseHiddenBottom);
+        courseHiddenBottom[randomIndex].style.backgroundColor = 'rgba(255, 255, 255, 0.705)';
+        courseHiddenBottom[randomIndex].style.color = 'black';
+        courseHiddenBottom[randomIndex].style.backdropFilter = 'blur(5px)';
+        courseHiddenCover[randomIndex].style.top = '-47%';
+        setTimeout(()=>{
+            courseHiddenBottom[randomIndex].style.backgroundColor = 'unset';
+            courseHiddenBottom[randomIndex].style.color = 'unset';
+            courseHiddenBottom[randomIndex].style.backdropFilter = 'unset';
+            courseHiddenCover[randomIndex].style.top = '';
+        }, 2500)
+    }, 1000);
 }
 

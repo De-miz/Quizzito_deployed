@@ -13,10 +13,12 @@
         <a class="nav-links" href="./" title="Go to Home page">Home</a>
         <a class="nav-links" href="about" title="Go to About page">About</a>
         <a class="nav-links" href="qgen" title="Generate your own custom quiz with Q-gen">Q-gen</a>
+        <!-- <a class="nav-links" href="qgen" title="Generate your own custom quiz with Q-gen">Donate</a> -->
         <span class="nav-links" title="This feature is not added yet" onclick="$displayManager(document.getElementById('login-popup'), new fade_args({elemID: 'login-popup', direction: 'middle', scale: 0.5, speed: 1, steps: 30})); $innerHTML('popupMsg', 'Sorry! This feature has not been added yet')">Login</span>
     </div>
     <div class="mobile-nav" id="mobile-nav">
-        <img class="mobile-menu" id="menu" src="{% static 'icons/menu_icon.png' %}" alt="Menu Icon" onclick="elementDisplaySwitcher(this, ['menu_icon.png', 'cancel_icon.png'], true); $displayManager(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'right', scale: 0, speed: 1, steps: 30}));">
+        <!-- <img class="mobile-menu" id="menu" src="{% static 'icons/menu_icon.png' %}" alt="Menu Icon" onclick="elementDisplaySwitcher(this, ['menu_icon.png', 'cancel_icon.png'], true); $displayManager(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'right', scale: 0, speed: 1, steps: 30}));"> -->
+        <span id="primary-mobile-menu" class="material-symbols-rounded primary-mobile-menu qs-pointer" onclick="menuDrawer(this.id)">menu</span>
     </div>
 </nav>
 
@@ -161,6 +163,19 @@
         <span class="menu" id="sql-quiz-8" onclick="mobileMenuLinksEventsManager(this, true)">SQL quiz 8</span>
         <span class="menu" id="sql-quiz-9" onclick="mobileMenuLinksEventsManager(this, true)">SQL quiz 9</span>
         <span class="menu" id="sql-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">SQL quiz 10</span>
+    </div>
+    <div class="sub-menu" onclick="showDropDown(this)">
+        <span class="side-menu-headers">Kotlin</span>
+        <span class="menu" id="kotlin-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">Kotlin quiz 1</span>
+        <span class="menu" id="kotlin-quiz-2" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 2</span>
+        <span class="menu" id="kotlin-quiz-3" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 3</span>
+        <span class="menu" id="kotlin-quiz-4" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 4</span>
+        <span class="menu" id="kotlin-quiz-5" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 5</span>
+        <span class="menu" id="kotlin-quiz-6" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 6</span>
+        <span class="menu" id="kotlin-quiz-7" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 7</span>
+        <span class="menu" id="kotlin-quiz-8" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 8</span>
+        <span class="menu" id="kotlin-quiz-9" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 9</span>
+        <span class="menu" id="kotlin-quiz-10" onclick="mobileMenuLinksEventsManager(this, true)">Kotlin quiz 10</span>
     </div>
 </div>
 <!-- Menu for Mobile View ends here -->
