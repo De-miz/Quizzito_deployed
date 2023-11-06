@@ -26,7 +26,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
 <span hidden>
     <!-- {% block HOME_PAGE_SCRIPT %}<script src="{% static 'scripts/index.js' %}"></script>{% endblock %} -->
     {% block body_attr %}
-        onresize="screensizeDetector();" 
+        onresize="try {screensizeDetector()} catch (error) {console.log('me')}" 
         onload="$addNewCourse('Python', 'Python is not a programming language, True or False?', 'images.jpeg');
         $addNewCourse('HTML', 'Is HTML5 supported by all browsers? let\'s find out', 'html.jpg');
         $addNewCourse('JavaScript', 'Is JavaScript easy to start with or very difficult?', 'javascript-logo-1.png');
@@ -37,6 +37,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
         $addNewCourse('CSharp', 'C# is one of the best when it comes to data analytics, True or False?', 'csharp.png');
         $addNewCourse('PHP', 'PHP is a server-side scripting language designed for web development.', 'php.jpg');
         $addNewCourse('SQL', 'A language for storing and processing information in a relational database.', 'SQL.jpg');
+        $addNewCourse('Kotlin', 'One of the best programming language for android apps development', 'kotlin.jpg');
         "
     {% endblock %}
 </span> 
@@ -74,7 +75,7 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
         </p>
         <div id="hint" title="Start your journey now!">select your preffered language from the side menu</div>
     </div>
-    <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top">↑↑</button>
+    <button onclick="document.documentElement.scrollTop = 0;" id="to-top" title="Go to top"><i class="fa-solid fa-chevron-up"></i></button>
 
     <div class='typer-main-section'>
         <div class="box1">
@@ -135,4 +136,8 @@ CSS quiz, JavaScript quiz, C++ quiz, PHP quiz, C# quiz, About Quizzito, Quiz, De
             <div class="distription-type-a">Your thoughts are important to us</div>
         </form>
     </div>
+{% endblock %}
+
+{% block ADDITIONAL_SCRIPTS %}
+    <script src="{% static 'scripts/course_cards.js' %}"></script>
 {% endblock %}

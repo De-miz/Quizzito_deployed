@@ -2,6 +2,7 @@
 
 var mainTag = document.getElementById('main'),
 sidemenu = document.getElementById("Side-menu"),
+autoHideNav = true,
 
 non_mobile_nav = document.getElementById('non-mobile-nav'), 
 mobile_nav = document.getElementById('mobile-nav'),
@@ -104,7 +105,6 @@ function screensizeDetector() {
         non_mobile_nav.style.display = 'block'
         sidemenu.style.display = 'block';
         non_mobile_nav.style.marginRight = `${screenWidth / 7.1}px`; 
-        resetMenuForMobile();
     }
 
     mainTag.style.marginLeft = screenWidth <= 700 || screenHeight <= 480 ? 0: "230px";
@@ -177,12 +177,63 @@ function showDropDown(menu) {
 }
 
 
-function resetMenuForMobile() {
+function resetMenuForMobile() { // function deprecated
     let img_file_path = menuIcon.src;
     img_file_path = img_file_path.split('/');
     img_file_path[img_file_path.length-1] = 'menu_icon.png'
     menuIcon.src = img_file_path.join('/');
     $forceDisappear(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'middle', scale: 0.5, speed: 1, steps: 70}));
+}
+
+
+const getCookie = function (key='csrftoken') {
+    let cookies = document.cookie.split(';');
+    for (let i of cookies) {
+        if (i.includes(key)) {
+            return i.replace(`${key}=`, '')
+        }
+    }
+}
+
+
+const make_request = function (
+    data={'COOKIE_WARNING': 1}, 
+    method='GET', 
+    callback=(function(){
+        if (!this.has_been_warned) {
+            $innerHTML('warningMsg', 'We use cookie to ensure user security on this website, this includes no personal data!');
+            $displayManager(document.getElementById('cookie-warning-popup'));
+        }
+    })
+    ) {
+
+    let isGet = method == 'GET';
+    let _, params = new URLSearchParams(data);
+    let url = (method == 'GET') ? `${'/make_request/'}?${params}`: '/make_request/';
+    fetch(
+        url, 
+        {
+            method: method, 
+            headers: {
+                "Content-Type": "application/json", 
+                "X-CSRFToken": getCookie(),
+            }, 
+            body: isGet ? null: JSON.stringify(data)
+        }
+    ).then (
+        response => response.json()
+    ).then (
+        data => {
+            if (Object.keys(data)) {
+                data.callback = callback;
+                data.callback();
+            }
+        }
+    ).catch (
+        error => {
+            console.log(error);
+        }
+    )
 }
 
 
@@ -203,116 +254,24 @@ function resetMenuForMobile() {
     status = 'on'; //Timer trigger
 
 
-    // function fadeIn({elemID, direction='top', scale=1, speed=10, steps=100}) {
-    //     /**
-    //      * ONLY DIRECTION RIGHT AND MIDDLE BEIGN SUPPORTED AT THE MOMMENT
-    //      * This function isn't recommended at the moment, avoid usage, why? because demiz says so [`cool emoji`]
-    //      * direction values: top, left, bottom, right, middle
-    //      */
-    
-    //     let intervalID, elem = document.getElementById(elemID), 
-    //     opc = 0, slideScale = (direction == 'top') || (direction == 'left') ? -100: 100, 
-    //     sld_interval = slideScale < 0 ? insterval(0, slideScale, steps): interval(slideScale, 0, steps), opc_interval = interval(0, 1, steps), scl_interval = interval(scale, 1, steps);
-    //     elem.style.opacity = 0;
-    //     elem.style.display = 'block';
-    //     intervalID = setInterval(show, speed);
-    //     function show() {
-    //         if (opc >= 1) {
-    //             clearInterval(intervalID);
-    //         } else {
-    //             opc = Number((opc + opc_interval).toFixed(3));
-    //             slideScale = setLimit(Number((slideScale + sld_interval).toFixed(3)), 0, -1);
-    //             scale = setLimit(Number((scale + scl_interval).toFixed(3)), 1);
-    //             elem.style.opacity = opc;
-    //             if (direction == 'top' || direction == 'bottom') {
-    //                 elem.style.transform = `translateY(${slideScale}%) scale(${scale})`;
-    //             } else if (direction == 'left' || direction == 'right') {
-    //                 elem.style.transform = `translateX(${slideScale}%) scale(${scale})`;
-    //             } else {
-    //                 elem.style.transform = `scale(${scale})`;
-    //             }
-    //         }
-    //     }
-    // }
-    
-    
-    // function fadeOut({elemID, direction='top', scale=1, speed=10, steps=100, configScroll=false}) {
-    //     /**
-    //      * ONLY DIRECTION RIGHT AND MIDDLE BEIGN SUPPORTED AT THE MOMMENT
-    //      * This function isn't recommended at the moment, avoid usage, why? because demiz says so [`cool emoji`]
-    //      * direction values: top, left, bottom, right, middle
-    //      */
-
-    //     let intervalID, elem = document.getElementById(elemID), 
-    //     opc = 1, slideScale = interval(-1, 0, steps), //(direction == 'top') || (direction == 'left') ? -100: 100, 
-    //     sld_interval = interval(100, 0, steps), opc_interval = interval(0, 1, steps), 
-    //     scl_interval = interval(scale, 1, steps), current_scale = 1;
-    
-    //     if (configScroll) { document.body.style.overflow = ''; }
-    //     intervalID = setInterval(show, speed);
-    //     function show() {
-    //         if (opc <= 0) {
-    //             elem.style.display = 'none';
-    //             clearInterval(intervalID);
-    //         } else {
-    //             opc = Number((opc - opc_interval).toFixed(3));
-    //             slideScale = Number((slideScale - sld_interval).toFixed(3));
-    //             current_scale = setLimit(Number((current_scale - scl_interval).toFixed(3)), 0, -1);
-    //             elem.style.opacity = opc;
-    //             if (direction == 'top' || direction == 'bottom') {
-    //                 elem.style.transform = `translateY(${slideScale}%) scale(${current_scale})`;
-    //             } else if (direction == 'left' || direction == 'right') {
-    //                 elem.style.transform = `translateX(${slideScale}%) scale(${current_scale})`;
-    //             } else {
-    //                 elem.style.transform = `scale(${current_scale})`;
-    //             }
-    //         }
-    //     }
-    // }
-    
-
-    // function setLimit(value, limit, gt_or_lt = 1) {
-    //     /**
-    //      * gt_or_lt (greater than or less than): this value must be 1, or -1
-    //      */
-    //     if (gt_or_lt > 0) {
-    //         if (value >= limit) {
-    //             return limit
-    //         }
-    //     } else {
-    //         if (value <= limit) {
-    //             return limit
-    //         }
-    //     }
-    //     return value
-    // }
-
-    
-    // function interval(initial=0, stop=0, steps=100) {
-    //     /**
-    //      * no argument will return no interval eg. 0
-    //      */
-    //     let var_interval = (stop - initial) / steps;
-    //     return var_interval;
-    // }
 
 
     function $displayManager(element, fade_arguments={}) {
-        /**
-         * MAKE SURE OF NECESSARY ARGUMENTS
-         * exp. fade_arguments = new fade_args({elemID: id, direction: 'middle', scale: 0.5, speed: 1, steps: 70})
-         */
-        let display = element.style.display;
-        if (Object.keys(fade_arguments).length) {
-        let animate = (display == 'none' || display == '') ? (function(){fadeIn(fade_arguments); handleScroll(false);}): (function(){fadeOut(fade_arguments); handleScroll();});
-            animate();
+        element.classList.toggle('showpopup');
+    }
+
+
+    function menuDrawer (elemID) {
+        let menu = document.getElementById(elemID);
+        // menu.innerText = (menu.innerText=='menu') ? 'close': 'menu';
+        if (menu.innerText=='menu') {
+            menu.innerText = 'close';
+            autoHideNav = false;
         } else {
-            if (display == 'none' || display == '') {
-                element.style.display = 'block';
-            } else {
-                element.style.display = 'none';
-            }
+            menu.innerText = 'menu';
+            autoHideNav = true;
         }
+        document.getElementById('hiddenmenu').classList.toggle('undoer');
     }
 
 
@@ -322,7 +281,7 @@ function resetMenuForMobile() {
     }
 
 
-    function $forceDisappear(element, fade_arguments={}) {
+    function $forceDisappear(element, fade_arguments={}) { // deprecated
         /**
          * if fade_arguments is not null, then it must be an anonymous function
          * with argument elementID eg. (function(elementID){})
@@ -336,7 +295,7 @@ function resetMenuForMobile() {
     }
     
 
-    function elementDisplaySwitcher(elem1, elem2, is_image=false, display_type='block') 
+    function elementDisplaySwitcher(elem1, elem2, is_image=false, display_type='block') // deprecated (under review)
     {
         /**
          * This function switches display properties to none between 2 elements 
@@ -439,7 +398,7 @@ function resetMenuForMobile() {
             quiz_total_questions = Number(document.getElementById('amount_of_questions').innerHTML);
         }
 
-        quiz_time_taken ??= '';
+        quiz_time_taken = (!quiz_time_taken) ? '':quiz_time_taken;
         document.getElementById('time-taken').innerHTML = 'Total time taken: ' + quiz_time_taken.innerHTML;
         document.getElementById('answered').innerHTML = 'Total Answered: ' + questions_answered;
         document.getElementById('incorrects').innerHTML = 'Incorrects: ' + (quiz_total_questions - questions_answered); // includes unattempted questions
@@ -459,8 +418,6 @@ function resetMenuForMobile() {
 
     function mobileMenuLinksEventsManager(element, non_qgen_notice=false) {
         quizManager(element, non_qgen_notice); 
-        // $forceDisappear(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'middle', scale: 1, speed: 1, steps: 30})); 
-        elementDisplaySwitcher(menuIcon, ['menu_icon.png', 'cancel_icon.png'], true);
     }
 
     function stopWatch() {
@@ -521,7 +478,7 @@ function resetMenuForMobile() {
         document.getElementById(course).innerHTML = cap(course);
         document.getElementById(new_description_id).innerHTML = description.length <= 75 ? description : "ERROR!!! LENGTH MUST BE 75 OR BELOW";
         courseCover.style.backgroundImage = `url('static/img/${img}')`;
-        courseCover.style.backgroundSize = "auto 100%";
+        courseCover.style.backgroundSize = "cover";
     }
 }
 {
@@ -547,34 +504,38 @@ function resetMenuForMobile() {
 
 // Events 
 
-window.onscroll = () => {
-    scrollCoords = document.documentElement.scrollTop;
-    scrollHistory.push(scrollCoords)
-    if (scrollCoords > 5) {
-        navigationBar.style.top = '-60px';
-        navigationBar.style.backgroundColor = 'rgba(255, 255, 255, 0.774)';
-        sidemenu.style.transition = '1s all ease-out';
-        sidemenu.style.top = '0';
-    } else {
-        navigationBar.style.backgroundColor = 'white';
-    }
-    if (scrollHistory.length > 2) {
-        scrollHistory.shift();
-        if (scrollHistory[0] > scrollHistory[1]) {
-            navigationBar.style.top = '0';
-            sidemenu.style.transition = '0.5s all linear';
-            sidemenu.style.top = '58px';
-        }
-    }
+make_request(); // check if user has been warned about cookies
 
-    if (scrollCoords >= 700) {
-        to_top_btn.style.display = "block";
-        to_top_btn.style.bottom = '10px';
-        to_top_btn.style.opacity = '1'
-        
-    } else {
-        to_top_btn.style.bottom = '-70px';
-        to_top_btn.style.opacity = '0'
+window.onscroll = () => {
+    if (autoHideNav) {
+        scrollCoords = document.documentElement.scrollTop;
+        scrollHistory.push(scrollCoords)
+        if (scrollCoords > 5) {
+            navigationBar.style.top = '-60px';
+            navigationBar.style.backgroundColor = 'rgba(255, 255, 255, 0.774)';
+            sidemenu.style.transition = '1s all ease-out';
+            sidemenu.style.top = '0';
+        } else {
+            navigationBar.style.backgroundColor = 'white';
+        }
+        if (scrollHistory.length > 2) {
+            scrollHistory.shift();
+            if (scrollHistory[0] > scrollHistory[1]) {
+                navigationBar.style.top = '0';
+                sidemenu.style.transition = '0.5s all linear';
+                sidemenu.style.top = '58px';
+            }
+        }
+    
+        if (scrollCoords >= 700) {
+            to_top_btn.style.display = "block";
+            to_top_btn.style.bottom = '10px';
+            to_top_btn.style.opacity = '1'
+            
+        } else {
+            to_top_btn.style.bottom = '-70px';
+            to_top_btn.style.opacity = '0'
+        }
     }
 }
 
@@ -588,65 +549,3 @@ for (i=0; i<resultPopupBox.length; i++) {
         }
     )(i)
 }
-
-{   // Course Cards Action
-
-    const courseHiddenCover = document.getElementsByClassName('tile_content');
-    const courseHiddenBottom = document.getElementsByClassName('hidden_content');
-    const courseButton = document.getElementsByClassName('tile-btn');
-    var hoveredCardIndex = 'None', eventType = '';
-
-    for (let i=0; i<courseHiddenCover.length; i++) {
-        (function(index) {
-
-            courseButton[index].addEventListener('click', function() {
-                // console.log('button has been clicked....');
-            })
-
-
-            courseHiddenCover[index].addEventListener('click', function(e) {
-                if (e.type == 'click') {
-                    if (!eventType) {
-                        hovered = courseHiddenCover[index].style.top == '' ? false: true;
-                        courseHiddenBottom[index].style.backgroundColor = hovered ? 'unset': 'rgba(255, 255, 255, 0.705)';
-                        courseHiddenBottom[index].style.color = hovered ? 'unset': 'black';
-                        courseHiddenBottom[index].style.backdropFilter = hovered ? 'unset': 'blur(5px)';
-                        courseHiddenCover[index].style.top = hovered ? '': '-47%';
-
-                        if (hoveredCardIndex != 'None' && hoveredCardIndex != index) {
-                            courseHiddenBottom[hoveredCardIndex].style.backgroundColor = 'unset';
-                            courseHiddenBottom[hoveredCardIndex].style.color = 'unset';
-                            courseHiddenBottom[hoveredCardIndex].style.backdropFilter = 'unset';
-                            courseHiddenCover[hoveredCardIndex].style.top = '';
-                        };
-
-                        hoveredCardIndex = index;
-                    }
-                }
-            });
-
-
-            courseHiddenCover[index].addEventListener('mouseover', function(e) {
-                if (e.type == 'mouseover') {
-                    courseHiddenBottom[index].style.backgroundColor = 'rgba(255, 255, 255, 0.705)';
-                    courseHiddenBottom[index].style.color = 'black';
-                    courseHiddenBottom[index].style.backdropFilter = 'blur(5px)';
-                    courseHiddenCover[index].style.top = '-47%';
-                    eventType = 'mouseover'
-                }
-            });
-
-
-            courseHiddenCover[index].addEventListener('mouseleave', function(e) {
-                if (e.type == 'mouseleave') {
-                    courseHiddenBottom[index].style.backgroundColor = 'unset';
-                    courseHiddenBottom[index].style.color = 'unset';
-                    courseHiddenBottom[index].style.backdropFilter = 'unset';
-                    courseHiddenCover[index].style.top = '';
-                    eventType = ''
-                }
-            });
-        })(i);
-    }
-}
-

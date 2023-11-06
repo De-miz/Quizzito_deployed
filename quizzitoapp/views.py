@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.urls import reverse
 from django.template import loader
@@ -7,13 +7,18 @@ from .models import Questions_Database1 as Q1
 from .models import Feedback
 from random import shuffle
 from .vars_funcs import *
+from json import loads
 
 
 
 
 def index(request):
     homepage = loader.get_template('index.html')
-    return HttpResponse(homepage.render({}, request))
+    context = {
+        'num_of_courses': len(set(Q1.objects.values_list('course'))), 
+        'list_of_courses': AVAILABLE_QUIZZES,
+    }
+    return HttpResponse(homepage.render(context, request))
 
 
 def notifier(request):
@@ -118,6 +123,7 @@ def quiz(request, course_url_like, amount_of_questions=0, difficulty=None, quiz_
         answered_qst_count=answered_qst_count,
         attempted_qst_count=attempted_qst_count,
         incorrects=amount_of_questions-answered_qst_count,
+        list_of_courses=AVAILABLE_QUIZZES,
     )
     request.session['user_questions'] = list(zipped2)
     return HttpResponse(quiz_page_tem.render(context, request))
@@ -164,13 +170,14 @@ def score_analyzation(request, course):
 
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'about.html', {'list_of_courses': AVAILABLE_QUIZZES,})
 
 
 def quiz_generator(request):
     template = loader.get_template('Q_gen.html')
     contents = {
-        'courses': [casing(i[0]) for i in set(Q1.objects.values_list('course'))],
+        'courses': AVAILABLE_QUIZZES,
+        'list_of_courses': AVAILABLE_QUIZZES,
         'level': [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
         'qgen_error1': '',
     }
@@ -213,3 +220,21 @@ def feedback(request):
             context['initiatFeedbackEmailBox'] = 'on'
         return HttpResponse(indexTemp.render(context, request))
     return HttpResponseRedirect(reverse('home'))
+
+
+# Requests from client side
+def client_requests_handler(request):
+    response_data = {
+        'message': 'unsuccessful'
+    }
+    if request.method == 'GET':
+        data = request.GET
+        if 'COOKIE_WARNING' in data.keys():
+            if request.session.get('cookie_warning'):
+                response_data['has_been_warned'] = True
+            else:
+                request.session['cookie_warning'] = True
+                response_data['has_been_warned'] = False
+        response_data['message'] = 'successful'
+
+    return JsonResponse(response_data)

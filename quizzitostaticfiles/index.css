@@ -4,8 +4,7 @@ html {
 }
 body {
     background-color: #ddeffd;
-    /* background-color: #d4d4d4; upcoming update*/
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Comfortaa, Arial, Helvetica, sans-serif;
 }
 
 /* Loader */
@@ -269,15 +268,12 @@ nav img {
     padding: 0 7px;
 }
 .mobile-nav {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
-    display: none;
     float: right;
     height: 45px;
     width: 50px;
-    background-color: #0080ff;
-    margin-top: 5px;
     margin-right: 5px;
     border-radius: 5px;
     overflow: hidden;
@@ -485,7 +481,7 @@ nav img {
 .hidden_content .hc_title{
     display: block;
     font-family: Raleway;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 2.5em;
     margin-top: 200px;
     margin-left: 10px;
@@ -506,7 +502,7 @@ nav img {
     color: white;
     background-color: #0080ff;
     transition: 0.1s all linear;
-    z-index: 100;
+    /* z-index: 100; */
 }
 .tile-btn:hover {
     background-color: #2d96ff;
@@ -518,17 +514,18 @@ nav img {
 /* For About Page */
 .about-remark{
     padding-left: 20px;
+    max-width: 1200px;
 }
 .about-page-headings {
     font-family: Raleway;
-    font-weight: lighter;
-    font-size: 2.5em;
+    font-weight: 600;
+    font-size: 2rem;
     color: #0080ff;
 }
 .about-page-parags {
     text-align: left;
     font-family: Poppins;
-    font-size: 2em;
+    font-size: 1.5rem;
     font-weight: 600;
 }
 .myself {
@@ -539,7 +536,6 @@ nav img {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.123);
 }
 #myself-header {
-    font-family: Raleway, Arial, Helvetica, sans-serif;
     font-size: 2em;
     padding: 10px;
 }
@@ -553,4 +549,27 @@ nav img {
     font-family: Quicksand;
     font-size: 1.4em;
     padding: 10px;
+}
+
+/* Footer */
+.footer-icons {
+    padding: 10px;
+    color: black;
+    font-size: 1.5em;
+    transition: 0.5 all linear;
+}
+.footer-icons:hover {
+    color: white;
+}
+
+
+@media screen and (max-width: 1340px) {
+    .imagebox_whyus .tile {
+        max-width: 100%;
+        width: 100%;
+        margin: 20px 0;
+    }
+    .tile_cover {
+        background-size: cover;
+    }
 }
