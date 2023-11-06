@@ -14,7 +14,6 @@ input:focus {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     font-family: Arial, Helvetica, sans-serif;
-    /* display: none; */
     opacity: 0;
     border-radius: 50px;
     transition: 1s all cubic-bezier(.08,.82,.17,1);
@@ -25,13 +24,12 @@ input:focus {
 .result {
     margin: auto;
     margin-top: 22vh;
-    /* margin-bottom: 50px; */
     background-color: #ffffff;
     height: max-content;
     max-width: 400px;
     min-width: 200px;
     padding-bottom: 35px;
-    border-radius: 15px;
+    border-radius: 25px;
     box-shadow: 0 0 10px 5px rgba(80, 80, 80, 0.103);
 }
 #result-background-main-box {

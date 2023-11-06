@@ -22,10 +22,12 @@ S2
 # THESE UPDATES ARE YET TO HAPPEN
 
 * updating db from pythonanywhere.com
-* programming riddles feature added
+* programming riddles feature added (under review)
 * New course added
 * user account now available
 * like/unlike on questions
+* css should handle element adjustments instead of js
+* unsubscribe within email
 * popup box adjustment (under review)
 * prompt users with the actual amount of questions available if less than the leveled-value
 * user authentication added (Google authentication API also integrated)
@@ -39,13 +41,17 @@ S2
 S3
 # CURRENT CHANGES (these could be changes from S1 and S2, must be deleted before commit S1 will replace it)
 
-* 
+* Privacy policy ready
+* inform users about cookies
+* UI/UX improvement
+* Minor bug fixes
 
 
 
 S4
 # FUTURE UPDATES 
 
+* Apply for ads (Google Adsense)
 * Whatsapp automation with python
 * MTN API implementation or any payment methods
 * blog posts added (after user account is available)
