@@ -68,3 +68,8 @@ def loop(start: int, stop: int=0):
 def make_a_list(values: str):
     values = values.split(',')
     return values
+
+
+@register.filter(name='lower')
+def lower(value: str):
+    return value.lower()

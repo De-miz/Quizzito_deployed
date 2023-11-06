@@ -8,8 +8,6 @@ body {
     height: -moz-fit-content;
     height: fit-content;
     font-family: Comfortaa, Arial, Helvetica, sans-serif;
-    /*display: flex;
-    flex-direction: column;*/
 }
 
 /* Questions Section */
@@ -18,7 +16,6 @@ body {
     text-align: center;
 }
 .questions-form {
-    /*position: relative;*/
     margin: 15px;
     height: -moz-fit-content;
     height: -webkit-fit-content;
@@ -31,7 +28,7 @@ body {
     max-width: 600px;
     min-width: 200px;
     padding: 35px 10px;
-    border-radius: 5px;
+    border-radius: 17px;
     font-size: 1em;
     box-shadow: 0 0 10px 0 rgba(165, 165, 165, 0.24);
 }
@@ -77,8 +74,6 @@ body {
     top: 65px;
     color: #0080ff;
     background-color: rgba(255, 255, 255, 0.829);
-    /* backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px); */
     z-index: 8;
 }
 
@@ -92,6 +87,8 @@ body {
 .primary-mobile-menu {
     color: #0582ff;
     font-size: 3em;
+    position: relative;
+    z-index: 5000;
 }
 .hidden-menu {
     position: fixed;
@@ -105,7 +102,6 @@ body {
     text-align: right;
     transform: translateX(100%);
     transition: 1s all cubic-bezier(.08,.82,.17,1);
-    /* display: none; */
     overflow: auto;
     cursor: pointer;
     z-index: 11;
@@ -156,10 +152,8 @@ body {
     padding-bottom: 20px;
     border-end-end-radius: 15px;
     background-color: rgba(255, 255, 255, 0.836);
-    /* background-color: rgba(255, 255, 255, 0); upcoming update*/ 
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    /*box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);*/
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     z-index: 15;
@@ -253,8 +247,6 @@ footer {
 #footer-form button {
     position: absolute;
     right: 16px;
-    /* top: 0; */
-    /* height: 100%; */
     padding: 20px 50px;
     border: none;
     border-radius: 50px;
@@ -389,7 +381,7 @@ footer {
     margin-top: 10px;
     background: white;
     padding: 10px 15px 33px 15px;
-    border-radius: 10px;
+    border-radius: 17px;
     width: 90%;
     max-width: 600px;
     box-shadow: 0 0 10px 0 rgba(165, 165, 165, 0.24);
@@ -434,7 +426,7 @@ input[type=radio] {
     font-size: 1.1em;
     background-color: #0080ff;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     color: white;
     transition: 0.1s all linear;
 }

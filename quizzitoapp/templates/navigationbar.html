@@ -1,7 +1,8 @@
 <!-- messed with by Demiz -->
 
-
 {% load static %}
+{% load demiztags %}
+
 
 <nav class="new-nav" id="main-nav">
     <div class="q-logo-box">
@@ -14,10 +15,9 @@
         <a class="nav-links" href="about" title="Go to About page">About</a>
         <a class="nav-links" href="qgen" title="Generate your own custom quiz with Q-gen">Q-gen</a>
         <!-- <a class="nav-links" href="qgen" title="Generate your own custom quiz with Q-gen">Donate</a> -->
-        <span class="nav-links" title="This feature is not added yet" onclick="$displayManager(document.getElementById('login-popup'), new fade_args({elemID: 'login-popup', direction: 'middle', scale: 0.5, speed: 1, steps: 30})); $innerHTML('popupMsg', 'Sorry! This feature has not been added yet')">Login</span>
+        <span class="nav-links" title="This feature is not added yet" onclick="$displayManager(document.getElementById('login-popup')); $innerHTML('popupMsg', 'Sorry! This feature has not been added yet')">Login</span>
     </div>
     <div class="mobile-nav" id="mobile-nav">
-        <!-- <img class="mobile-menu" id="menu" src="{% static 'icons/menu_icon.png' %}" alt="Menu Icon" onclick="elementDisplaySwitcher(this, ['menu_icon.png', 'cancel_icon.png'], true); $displayManager(mobileMenu, new fade_args({elemID: mobileMenu.id, direction: 'right', scale: 0, speed: 1, steps: 30}));"> -->
         <span id="primary-mobile-menu" class="material-symbols-rounded primary-mobile-menu qs-pointer" onclick="menuDrawer(this.id)">menu</span>
     </div>
 </nav>
@@ -34,6 +34,18 @@
     <div class="hidden-menu-top-headers">
         <a href="qgen" title="Generate your own custom quiz with Q-gen">Q-gen</a>
     </div>
+    <!-- {% for i in list_of_courses %}
+        <div class="sub-menu" onclick="showDropDown(this)">
+            <span class="side-menu-headers">{{i}}</span>
+            {% for j in 1|loop:11 %}
+                {% if j == 1 %}
+                    <span class="menu" id="{{i|lower}}-quiz-{{j}}" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">{{i}} quiz {{j}}</span>
+                {% else %}
+                    <span class="menu" id="{{i|lower}}-quiz-{{j}}" onclick="mobileMenuLinksEventsManager(this, true)">{{i}} quiz {{j}}</span>
+                {% endif %}
+            {% endfor %}
+    {% endfor %} -->
+    
     <div class="sub-menu" onclick="showDropDown(this)">
         <span class="side-menu-headers">Python</span>
         <span class="menu" id="python-quiz-1" onclick="mobileMenuLinksEventsManager(this, true)" name="first-menu">Python quiz 1</span>

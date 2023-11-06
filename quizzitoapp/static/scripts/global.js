@@ -26,8 +26,8 @@ scaleItems = new Map( // Make sure to add ALL necessary attributes
                 new elemObject({name: 'hidden-menu-top-headers', fontsize: '1.2em'}),
                 new elemObject({name: 'menu', fontsize: '17px', reduce_size: '1 / 10'}),
                 new elemObject({name: 'result', transform: 'scale(1)', reduce_size: '1 / 2'}), 
-                new elemObject({name: 'about-page-headings', fontsize: '2.5em'}), 
-                new elemObject({name: 'about-page-parags', fontsize: '2em', reduce_size: '3 / 10'}), 
+                new elemObject({name: 'about-page-headings', fontsize: '2rem'}), 
+                new elemObject({name: 'about-page-parags', fontsize: '1.5rem', reduce_size: '3 / 10'}), 
                 new elemObject({name: 'myself-header', fontsize: '2em', reduce_size: '1.5 / 10'}), 
                 new elemObject({name: 'myself-para', fontsize: '1.4em', reduce_size: '1 / 5'}), 
                 new elemObject({name: 'style1-btn', fontsize: '1.2em', padding: '15px 50px', reduce_size: '1 / 5'})
@@ -397,7 +397,6 @@ window.addEventListener('load', () => {
     closeLoader();
     scaler('result-background-main-box');
     scaler('quiz-description-background-main-box');
-    // scaler('login-popup-main-box');  Already present in index.js
     scaler('feed-popup-main-box');
 });
 

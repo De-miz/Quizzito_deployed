@@ -19,6 +19,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), # HIDEN FOR PRODUCTION
     path('feedback', feedback, name='feedback'), 
     path('accounts/', include('allauth.urls')),
+    path('make_request/', client_requests_handler, name='make_request'),
     path('about', about, name='about'),
     path('qgen', quiz_generator, name='qgen'),
     path('accounts/', include('allauth.urls')),
